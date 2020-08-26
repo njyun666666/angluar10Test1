@@ -1,19 +1,20 @@
 import { Injectable } from '@angular/core';
 import { ApiService } from 'src/app/core/services/api.service';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class HomeService {
 
-  constructor(private api: ApiService) { }
+  constructor(private apiService: ApiService) { }
 
 
   getTest() {
 
     console.log('getTest()');
     const params = { Language: 1, Page: 25 };
-    return this.api.get('https://localhost:44326/api/SampleData/WeatherForecasts', params);
+    return this.apiService.get(environment.apiUrl + 'SampleData/WeatherForecasts', params);
 
   }
 
@@ -23,9 +24,9 @@ export class HomeService {
 
   postTest() {
 
-    console.log('getTest2()');
+    console.log('postTest()');
     const params = { Language: 1, Page: 25 };
-    return this.api.post('https://localhost:44326/api/SampleData/WeatherForecasts', params);
+    return this.apiService.post(environment.apiUrl + 'SampleData/WeatherForecasts', params);
 
   }
 
