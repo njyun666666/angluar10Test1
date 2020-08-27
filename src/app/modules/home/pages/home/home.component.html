@@ -5,3 +5,23 @@
 
 <br><br>
 <button type="button" (click)='postTest()'>post test</button>
+
+
+<br><br>
+
+
+
+
+<form [formGroup]="form"  (ngSubmit)="onSubmit()" >
+
+  <input type="text" formControlName="account">
+  <br>
+  <input type="text" formControlName="password">
+
+  <button type="submit" [disabled]="!form.valid || isSubmit">
+    Submit
+  </button>
+
+</form>
+
+

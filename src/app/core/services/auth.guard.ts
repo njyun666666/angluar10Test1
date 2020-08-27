@@ -62,9 +62,6 @@ export class AuthGuard implements CanActivate, CanActivateChild {
     const url = state.url.split('?')[0];
     const queryParams = next.queryParams;
 
-    console.log('doCanActivate');
-    console.log(url);
-    console.log(queryParams);
 
     return this.authService.authcheck(url, queryParams);
 

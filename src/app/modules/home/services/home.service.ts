@@ -10,10 +10,10 @@ export class HomeService {
   constructor(private apiService: ApiService) { }
 
 
-  getTest() {
+  getTest(params) {
 
     console.log('getTest()');
-    const params = { Language: 1, Page: 25 };
+    // const params = { Language: 1, Page: 25 };
     return this.apiService.get(environment.apiUrl + 'SampleData/WeatherForecasts', params);
 
   }

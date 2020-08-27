@@ -5,7 +5,7 @@ import { CommonModule } from '@angular/common';
 import { LayoutModule } from './modules/layout/layout.module';
 import { HttpClientModule } from '@angular/common/http';
 import { CookieService } from 'ngx-cookie-service';
-
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -13,7 +13,12 @@ import { CookieService } from 'ngx-cookie-service';
   imports: [
     CommonModule,
     LayoutModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule
+  ],
+  exports: [
+    ReactiveFormsModule
   ],
   providers: [
     ApiService,
