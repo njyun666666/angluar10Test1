@@ -29,7 +29,7 @@ export class HomeComponent implements OnInit {
 
 
 
-    this.cookieService.set('token', 'Hello World', 30); // 30 day
+    this.cookieService.set('token', 'HelloWorld', 30); // 30 day
     // this.cookieService.delete('token');
     // this.cookieService.deleteAll();
     // this.cookieService.get('token');

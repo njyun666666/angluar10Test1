@@ -1,3 +1,4 @@
+import { LanguageService } from './../../language/services/language.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -10,6 +11,9 @@ export class MainLayoutComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+
+
+
   }
 
 }

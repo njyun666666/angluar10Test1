@@ -1,11 +1,10 @@
-import { ApiService } from 'src/app/core/services/api.service';
-import { AuthGuard } from 'src/app/core/services/auth.guard';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LayoutModule } from './modules/layout/layout.module';
 import { HttpClientModule } from '@angular/common/http';
-import { CookieService } from 'ngx-cookie-service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { LanguageModule } from './modules/language/language.module';
+
 
 
 @NgModule({
@@ -15,15 +14,15 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     LayoutModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    LanguageModule
   ],
   exports: [
     ReactiveFormsModule
   ],
-  providers: [
-    ApiService,
-    CookieService,
-    AuthGuard
-  ]
+  providers: []
 })
-export class SharedModule { }
+
+export class SharedModule {
+
+}
