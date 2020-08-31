@@ -1,17 +1,26 @@
+import { LanguageService } from './../services/language.service';
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-  name: 'language'
+  name: 'language',
+  // pure: false
 })
 export class LanguagePipe implements PipeTransform {
 
-  transform(value: string): string {
+
+  constructor(private languageService: LanguageService) { }
 
 
-    const langTextJson = JSON.parse(localStorage.langText);
 
-    if (langTextJson[value]) {
-      return langTextJson[value];
+
+  transform(value: string, lang: string): string {
+    // console.log(`pipe language => ${value} , ${lang}`);
+    // const langTextJson = this.languageService.langText;
+    // console.log(this.languageService.langText);
+    // const langTextJson = JSON.parse(localStorage.langText);
+
+    if (typeof (this.languageService.langText) !== 'undefined' && this.languageService.langText[value] !== 'undefined') {
+      return this.languageService.langText[value];
     }
 
     return null;

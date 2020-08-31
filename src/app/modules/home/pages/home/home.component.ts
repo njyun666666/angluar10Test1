@@ -1,3 +1,4 @@
+import { LanguageService } from './../../../../shared/modules/language/services/language.service';
 import { HomeService } from './../../services/home.service';
 import { Component, OnInit } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
@@ -23,7 +24,11 @@ export class HomeComponent implements OnInit {
 
 
 
-  constructor(private homeService: HomeService, private cookieService: CookieService, private formBuilder: FormBuilder) { }
+  constructor(private homeService: HomeService,
+              private cookieService: CookieService,
+              private formBuilder: FormBuilder,
+              public languageService: LanguageService
+              ) { }
 
   ngOnInit() {
 
@@ -91,6 +96,15 @@ export class HomeComponent implements OnInit {
 
 
   }
+
+
+
+  getLangServiceLang(){
+    console.log(this.languageService.defaultLang);
+  }
+
+
+
 
 
 

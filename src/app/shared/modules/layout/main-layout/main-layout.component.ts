@@ -8,12 +8,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MainLayoutComponent implements OnInit {
 
-  constructor() { }
+  constructor(private languageService: LanguageService) { }
 
   ngOnInit() {
 
 
 
   }
+
+
+
+  setDefaultLang(lang?: string) {
+    this.languageService.setDefaultLang(lang);
+    console.log(this.languageService.defaultLang);
+  }
+
+
+
+
 
 }

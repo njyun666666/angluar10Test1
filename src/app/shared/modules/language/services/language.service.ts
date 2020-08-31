@@ -1,6 +1,6 @@
 import { CookieService } from 'ngx-cookie-service';
 import { ApiService } from 'src/app/core/services/api.service';
-import { Injectable, InjectionToken, Inject } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 
 
@@ -12,21 +12,9 @@ export class LanguageService {
 
   defaultLang;
   langText;
+  changeLang;
 
-  constructor(private cookieService: CookieService,
-              private apiService: ApiService,
-    // @Inject(DEFAULT_LANGUAGE) defaultLanguage: string
-  ) {
-
-    // console.log('LanguageService >>>>>>>>>>>>>>>>>>>>>');
-    // console.log(defaultLanguage);
-
-    // this.setDefaultLang(defaultLanguage);
-
-
-
-    // console.log('LanguageService <<<<<<<<<<<<<<<<<<<<<');
-  }
+  constructor(private cookieService: CookieService, private apiService: ApiService) { }
 
 
   setDefaultLang(lang?: string): void {
@@ -51,7 +39,6 @@ export class LanguageService {
     }
 
     this.cookieService.set('lang', this.defaultLang);
-
     this.getLanguageText(this.defaultLang);
 
   }
@@ -60,35 +47,35 @@ export class LanguageService {
 
   getLanguageText(lang): void {
 
-    // const localStorageLangText = localStorage.langText;
-
     // const langTextJson = JSON.parse(localStorage.langText);
     // const langTextUpdateTime = langTextJson.langTextUpdateTime;
 
 
-    // const params = { langTextUpdateTime };
-    // this.apiService.post(environment.apiUrl + 'Common/LanguageTextGet', params);
+    // const params = { langTextUpdateTime, lang };
+    // this.apiService.post(environment.apiUrl + 'Common/LanguageTextGet', params).subscribe((result) => {
 
+    //   if (result) {
+    //     localStorage.langText = JSON.stringify(result);
+    //     this.langText = result;
+    //   }
 
-    // if (langText) {
-
-    // }
+    // });
 
     this.apiService.get('/assets/i18n/' + lang + '.json').subscribe((result) => {
 
       if (result) {
         localStorage.langText = JSON.stringify(result);
-        // this.langText = result;
-        console.log(result);
+        this.langText = result;
+        this.changeLang = lang;
+
+        // console.log(this.changeLang);
       }
 
     });
 
 
+
   }
-
-
-
 
 
 

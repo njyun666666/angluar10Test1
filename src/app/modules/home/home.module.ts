@@ -12,7 +12,7 @@ import { HomeRoutingModule } from './home-routing.module';
   imports: [
     CommonModule,
     SharedModule,
-    HomeRoutingModule
+    HomeRoutingModule,
   ],
   providers: [
     ApiService

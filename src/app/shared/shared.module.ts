@@ -18,7 +18,8 @@ import { LanguageModule } from './modules/language/language.module';
     LanguageModule
   ],
   exports: [
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    LanguageModule
   ],
   providers: []
 })

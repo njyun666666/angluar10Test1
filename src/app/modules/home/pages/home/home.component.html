@@ -12,7 +12,7 @@
 
 
 
-<form [formGroup]="form"  (ngSubmit)="onSubmit()" >
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
 
   <input type="text" formControlName="account">
   <br>
@@ -25,4 +25,12 @@
 </form>
 
 <br><br>
-<!-- {{ 'home' | language}} -->
+{{ 'home' | language : this.languageService.changeLang }}
+<br>
+{{ 'text' | language : this.languageService.changeLang }}
+<br>
+
+<!-- {{this.languageService.langText["home"]}} -->
+
+<br><br>
+<button (click)="getLangServiceLang()">getLangServiceLang</button>

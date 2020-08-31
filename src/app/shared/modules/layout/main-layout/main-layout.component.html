@@ -1,2 +1,13 @@
 <h1>main layout</h1>
+
+<div>
+  <button (click)='setDefaultLang("zh-TW");'>zh-TW</button>
+  <br><br>
+  <button (click)='setDefaultLang("en-US");'>en-US</button>
+</div>
+
+
+<!-- {{ 'zh-TW' | language }} -->
+
+
 <router-outlet></router-outlet>
