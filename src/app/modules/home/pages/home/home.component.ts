@@ -15,7 +15,8 @@ export class HomeComponent implements OnInit {
 
   form = this.formBuilder.group({
     account: [null, [Validators.required]],
-    password: [null, Validators.required]
+    password: [null, Validators.required],
+    file: [null]
   });
 
 
@@ -25,10 +26,10 @@ export class HomeComponent implements OnInit {
 
 
   constructor(private homeService: HomeService,
-              private cookieService: CookieService,
-              private formBuilder: FormBuilder,
-              public languageService: LanguageService
-              ) { }
+    private cookieService: CookieService,
+    private formBuilder: FormBuilder,
+    public languageService: LanguageService
+  ) { }
 
   ngOnInit() {
 
@@ -40,7 +41,8 @@ export class HomeComponent implements OnInit {
     // this.cookieService.get('token');
 
 
-    this.form.setValue({ account: 'admin', password: 'adminPassword' });
+    // this.form.setValue({ account: 'admin', password: 'adminPassword' });
+    this.form.patchValue({ account: 'admin', password: 'adminPassword' });
 
     // get formBuilder value
     // this.form.value
@@ -84,7 +86,7 @@ export class HomeComponent implements OnInit {
 
 
   onSubmit() {
-
+    console.log('onSubmit>>>>>>>>>>>>>>>>>>>>>>');
 
     // let account = this.form.get('account').value;
 
@@ -92,14 +94,70 @@ export class HomeComponent implements OnInit {
     console.log(this.form);
     console.log(this.form.value);
 
+    console.log(this.form.get('file'));
+    // console.log();
+
+    const formData: FormData = new FormData();
+    formData.append('account', this.form.get('account').value);
+    formData.append('password', this.form.get('password').value);
+
+
+
+    const fileList = this.form.get('file').value;
+
+    for (const file of fileList) {
+      // console.log(file);
+      formData.append('file', file);
+    }
+
+
+
+    // formData.append('file', this.form.get('file').value);
+    // formData.append('file', document.getElementById('file')[0]);
+
+
+
+
+    this.homeService.submit(formData).subscribe(result => {
+      const code = result.code;
+      const message = result.message;
+      const viewModelList = result.viewModelList;
+
+
+      console.log('onSubmit<<<<<<<<<<<<<<<<<<');
+
+    });
 
 
 
   }
 
+  onFileSelect(event) {
+
+    if (event.target.files.length > 0) {
+
+      this.form.get(event.target.name).setValue(event.target.files);
+
+    } else {
+      this.form.get(event.target.name).setValue(null);
+    }
 
 
-  getLangServiceLang(){
+  }
+
+
+  // onFileSelect(event) {
+  //   if (event.target.files.length > 0) {
+
+  //     let fileList: Array<any>;
+  //     const file = event.target.files[0];
+  //     this.form.get(event.target.name).setValue(file);
+  //   }
+  // }
+
+
+
+  getLangServiceLang() {
     console.log(this.languageService.defaultLang);
   }
 

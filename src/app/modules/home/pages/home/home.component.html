@@ -12,12 +12,16 @@
 
 
 
-<form [formGroup]="form" (ngSubmit)="onSubmit()">
+<form [formGroup]="form" (ngSubmit)="onSubmit()" enctype="multipart/form-data" multiple>
 
   <input type="text" formControlName="account">
   <br>
   <input type="text" formControlName="password">
+  <br>
+  <input type="file" name="file" (change)="onFileSelect($event)" multiple>
+  <!-- <input type="file" name="file" (change)="onFileSelect($event)" > -->
 
+  <br><br>
   <button type="submit" [disabled]="!form.valid || isSubmit">
     Submit
   </button>
@@ -34,3 +38,38 @@
 
 <br><br>
 <button (click)="getLangServiceLang()">getLangServiceLang</button>
+
+
+<br><br>
+
+<table>
+  <thead>
+    <tr>
+      <th>title1</th>
+      <th>title2</th>
+      <th>title3</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>aaa</td>
+      <td>bbb</td>
+      <td>ccc</td>
+    </tr>
+    <tr>
+      <td>aaa</td>
+      <td>bbb</td>
+      <td>ccc</td>
+    </tr>
+    <tr>
+      <td>aaa</td>
+      <td>bbb</td>
+      <td>ccc</td>
+    </tr>
+    <tr>
+      <td>aaa</td>
+      <td>bbb</td>
+      <td>ccc</td>
+    </tr>
+  </tbody>
+</table>

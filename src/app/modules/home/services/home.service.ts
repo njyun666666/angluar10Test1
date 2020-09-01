@@ -31,4 +31,12 @@ export class HomeService {
   }
 
 
+  submit(params) {
+
+    console.log('postTest()');
+    // const params = { Language: 1, Page: 25 };
+    return this.apiService.post(environment.apiUrl + 'Test/TestSingleFile', params);
+
+  }
+
 }
