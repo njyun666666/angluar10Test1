@@ -18,7 +18,8 @@ export class AuthService {
     console.log(queryParams);
 
     let result = false;
-    const api = environment.apiUrl + 'Account/AuthCheck';
+    const api = environment.apiUrl + '/api/Account/AuthCheck';
+    // const api = '/api/Account/AuthCheck';
     const params = { url };
 
     const res = await this.apiService.post(api, params).toPromise();

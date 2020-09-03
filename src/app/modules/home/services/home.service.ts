@@ -14,7 +14,8 @@ export class HomeService {
 
     console.log('getTest()');
     // const params = { Language: 1, Page: 25 };
-    return this.apiService.get(environment.apiUrl + 'SampleData/WeatherForecasts', params);
+    return this.apiService.get(environment.apiUrl + '/api/SampleData/WeatherForecasts', params);
+    // return this.apiService.get('/api/SampleData/WeatherForecasts', params);
 
   }
 
@@ -26,16 +27,18 @@ export class HomeService {
 
     console.log('postTest()');
     const params = { Language: 1, Page: 25 };
-    return this.apiService.post(environment.apiUrl + 'SampleData/WeatherForecasts', params);
+    return this.apiService.post(environment.apiUrl + '/api/SampleData/WeatherForecasts', params);
+    // return this.apiService.post('/api/SampleData/WeatherForecasts', params);
 
   }
 
 
   submit(params) {
 
-    console.log('postTest()');
+    console.log('submit()');
     // const params = { Language: 1, Page: 25 };
-    return this.apiService.post(environment.apiUrl + 'Test/TestSingleFile', params);
+    return this.apiService.post(environment.apiUrl + '/api/Test/TestSingleFile', params);
+    // return this.apiService.post('/api/Test/TestSingleFile', params);
 
   }
 

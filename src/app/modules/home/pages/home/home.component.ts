@@ -26,9 +26,9 @@ export class HomeComponent implements OnInit {
 
 
   constructor(private homeService: HomeService,
-    private cookieService: CookieService,
-    private formBuilder: FormBuilder,
-    public languageService: LanguageService
+              private cookieService: CookieService,
+              private formBuilder: FormBuilder,
+              public languageService: LanguageService
   ) { }
 
   ngOnInit() {
