@@ -5,6 +5,8 @@ import { CookieService } from 'ngx-cookie-service';
 import { FormBuilder, Validators } from '@angular/forms';
 
 import * as XLSX from 'xlsx';
+import * as Excel from 'exceljs';
+import { saveAs } from 'file-saver';
 
 
 @Component({
@@ -24,19 +26,19 @@ export class HomeComponent implements OnInit {
 
   data = [
     { Name: 'Bill Clinton', Index: 42000, Date: '2020-09-08T10:11:12' },
-    { Name: 'GeorgeW Bush', Index: 43000, Date: '2020-09-08T10:11:12' },
-    { Name: 'Barack Obama', Index: 44000, Date: '2020-09-08T10:11:12' },
-    { Name: 'Donald Trump', Index: 45000, Date: '2020-09-08T10:11:12' },
-    { Name: '姓名姓名姓名', Index: 45000, Date: '2020-09-08T10:11:12' }
+    { Name: 'GeorgeW Bush', Index: 43000, Date: '2020-09-08T11:11:12' },
+    { Name: 'Barack Obama', Index: 44000, Date: '2020-09-08T12:11:12' },
+    { Name: 'Donald Trump', Index: 45000, Date: '2020-09-08T13:11:12' },
+    { Name: '姓名姓名姓名', Index: 45000, Date: '2020-09-08T14:11:12' }
   ];
 
 
 
 
   constructor(private homeService: HomeService,
-              private cookieService: CookieService,
-              private formBuilder: FormBuilder,
-              public languageService: LanguageService
+    private cookieService: CookieService,
+    private formBuilder: FormBuilder,
+    public languageService: LanguageService
   ) { }
 
   ngOnInit() {
@@ -262,10 +264,107 @@ export class HomeComponent implements OnInit {
 
 
 
-  // exceljs() {
+  exceljs() {
 
-  //   // const workbook = new Excel.Workbook();
-  // }
+    const workbook = new Excel.Workbook();
+    workbook.creator = 'Me';
+    workbook.lastModifiedBy = 'Her';
+    workbook.created = new Date(1985, 8, 30);
+    workbook.modified = new Date();
+    workbook.lastPrinted = new Date(2016, 9, 27);
+    // 将工作簿日期设置为 1904 年日期系统
+    workbook.properties.date1904 = true;
+
+
+
+
+    const fontStyle = {
+      name: 'Times New Roman',
+      family: 4,
+      size: 16,
+      color: { argb: 'FFFF0000' },
+      underline: true,
+      bold: true
+    };
+
+
+
+
+
+    // 创建带有红色标签颜色的工作表
+    const worksheet = workbook.addWorksheet('Sheet1', { properties: { tabColor: { argb: 'FFC0000' } } });
+    const worksheet2 = workbook.addWorksheet('Sheet2', { properties: { tabColor: { argb: '00FFFF00' } } });
+
+
+    worksheet.columns = [
+      { header: 'Name', key: 'Name', width: 32, style: { font: fontStyle } },
+      { header: 'Index', key: 'Index', width: 10 },
+      { header: 'Date', key: 'Date', width: 20, style: { numFmt: 'yyyy/MM/d HH:mm:ss' } }
+    ];
+
+
+
+    // worksheet.getCell('B1').fill = {
+    //   type: 'pattern',
+    //   pattern: 'solid',
+    //   fgColor: { argb: 'FFFFFF00' },
+    //   bgColor: { argb: '00FFFF00' }
+    // };
+
+
+    // 通过键，字母和基于1的列号访问单个列
+    const nameCol = worksheet.getColumn('A');
+    const indexCol = worksheet.getColumn(2);
+    const dateCol = worksheet.getColumn('Date');
+
+    indexCol.numFmt = '#,##0.00;[Red]\-#,##0.00';
+
+
+
+    const row1 = worksheet.getRow(1);
+    row1.fill = {
+      type: 'pattern',
+      pattern: 'solid',
+      fgColor: { argb: 'FFFFFF00' },
+      bgColor: { argb: '00FFFF00' }
+    };
+
+
+    row1.border = {
+      top: { style: 'thin' },
+      left: { style: 'thin' },
+      bottom: { style: 'thin' },
+      right: { style: 'thin' }
+    };
+
+
+
+    // worksheet.addRow({ Name: 'John Doe', Index: 10000, Date: new Date(1970, 1, 1) });
+
+    worksheet.addRows(this.data);
+
+
+
+
+
+
+
+
+    const C3 = worksheet.getCell('C3');
+
+    // 修改/添加单个单元格
+    C3.value = new Date(2020, 1, 1);
+    // C3.style.fill='';
+
+    // export to file
+    workbook.xlsx.writeBuffer().then((buffer) => {
+      const fileType = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';
+      const fileExtension = '.xlsx';
+      const blob = new Blob([buffer], { type: fileType });
+      saveAs(blob, 'exceljs' + fileExtension);
+    });
+
+  }
 
 
 }
