@@ -4,10 +4,13 @@ import { Component, OnInit } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { FormBuilder, Validators } from '@angular/forms';
 
+import * as XLSX from 'xlsx';
+
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss']
+  styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
 
@@ -19,8 +22,13 @@ export class HomeComponent implements OnInit {
     file: [null]
   });
 
-
-
+  data = [
+    { Name: 'Bill Clinton', Index: 42000, Date: '2020-09-08T10:11:12' },
+    { Name: 'GeorgeW Bush', Index: 43000, Date: '2020-09-08T10:11:12' },
+    { Name: 'Barack Obama', Index: 44000, Date: '2020-09-08T10:11:12' },
+    { Name: 'Donald Trump', Index: 45000, Date: '2020-09-08T10:11:12' },
+    { Name: '姓名姓名姓名', Index: 45000, Date: '2020-09-08T10:11:12' }
+  ];
 
 
 
@@ -162,8 +170,102 @@ export class HomeComponent implements OnInit {
   }
 
 
+  export() {
+    /* generate worksheet */
+    const ws: XLSX.WorkSheet = XLSX.utils.json_to_sheet(this.data);
 
 
+    // const ws: XLSX.WorkSheet = XLSX.utils.aoa_to_sheet(this.data);
+
+    /* generate workbook and add the worksheet */
+    const wb: XLSX.WorkBook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+
+    /* save to file */
+    XLSX.writeFile(wb, 'SheetJS.xlsx');
+  }
+
+
+
+  table_to_sheet() {
+    const table = document.getElementById('demo-table');
+    const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(table);
+
+
+
+    ws.A1 = { font: { sz: 20 } };
+
+
+    ws.A1.v = '姓名';
+    console.log(ws.A2.v);
+    console.log(ws.B2.v);
+
+    ws.B2.z = '#,##0';
+
+    // ws.B2.s =
+    // {
+    //   fill: {
+    //     fgColor: { rgb: 'FFFFAA' }
+    //   }
+    // };
+
+
+    // ws.B3.s =
+    // {
+    //   fgColor: { rgb: 'FFFFAA' }
+    // };
+
+    // const ws: XLSX.WorkSheet = XLSX.utils.aoa_to_sheet(this.data);
+
+
+
+
+    const cells = Object.keys(ws);
+    console.log(cells);
+
+    cells.forEach(x => {
+      console.log(x);
+
+      if (x.match('^B[0-9]+$') && x !== 'B1') {
+        ws[x].z = '#,##0';
+      }
+
+      if (x.match('^C[0-9]+$') && x !== 'C1') {
+        ws[x].z = 'yyyy/MM/d HH:mm:ss';
+      }
+
+    });
+
+    const wscols = [
+      { wch: 10 },
+      { wch: 10 },
+      { wch: 20 }
+    ];
+
+    ws['!cols'] = wscols;
+    console.log(ws['!cols']);
+
+
+
+
+
+
+    /* generate workbook and add the worksheet */
+    const wb: XLSX.WorkBook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+
+    /* save to file */
+    XLSX.writeFile(wb, 'SheetJS.xlsx', { cellStyles: true });
+  }
+
+  // const ExcelJS = require('exceljs');
+
+
+
+  // exceljs() {
+
+  //   // const workbook = new Excel.Workbook();
+  // }
 
 
 }
