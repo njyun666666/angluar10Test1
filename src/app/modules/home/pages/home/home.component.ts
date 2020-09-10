@@ -356,6 +356,36 @@ export class HomeComponent implements OnInit {
     C3.value = new Date(2020, 1, 1);
     // C3.style.fill='';
 
+
+
+
+
+    worksheet.mergeCells('A6:B6');
+    const A6 = worksheet.getCell('A6');
+    A6.value = 'merge A6:B6';
+    A6.border = {
+      top: { style: 'thin' },
+      left: { style: 'thin' },
+      bottom: { style: 'thin' },
+      right: { style: 'thin' }
+    };
+
+
+    worksheet.mergeCells('C6:C7');
+    const C6 = worksheet.getCell('C6');
+    C6.value = 'merge C6:C7';
+    C6.border = {
+      top: { style: 'thin' },
+      left: { style: 'thin' },
+      bottom: { style: 'thin' },
+      right: { style: 'thin' }
+    };
+
+
+
+
+
+
     // export to file
     workbook.xlsx.writeBuffer().then((buffer) => {
       const fileType = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';
