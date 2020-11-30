@@ -7,9 +7,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FirstComponent implements OnInit {
 
+  firstText1 = new Date().toISOString();
+
+
+  One_List = ['a', 'b', 'c'];
+  Two_List = ['d', 'e', 'f'];
+
   constructor() { }
 
   ngOnInit() {
   }
+
+
+
+  first2OutText(event) {
+    console.log(event);
+  }
+
+
+
 
 }

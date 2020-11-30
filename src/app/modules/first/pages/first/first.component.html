@@ -1,3 +1,18 @@
 <p>first template!</p>
+{{firstText1}}
+<app-first2 [firstText1]="firstText1" (first2OutText)="first2OutText($event)"></app-first2>
 
-<app-first2></app-first2>
+<br><br>
+
+<table class='table table-border table-striped'>
+  <thead>
+    <tr></tr>
+  </thead>
+  <tbody>
+    <ng-container *ngFor="let x of One_List">
+      <tr *ngFor="let y of Two_List">
+        <td>{{x}}+{{y}}</td>
+      </tr>
+    </ng-container>
+  </tbody>
+</table>
