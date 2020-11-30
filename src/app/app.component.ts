@@ -7,7 +7,7 @@ import { LanguageService } from './shared/modules/language/services/language.ser
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  // title = 'angluar10Test1';
+  // title = 'angular10Test1';
 
 
   constructor(private languageService: LanguageService) { }

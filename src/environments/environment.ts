@@ -13,7 +13,7 @@ export const environment = {
 // "serve": {
 //   "builder": "@angular-devkit/build-angular:dev-server",
 //   "options": {
-//     "browserTarget": "angluar10Test1:build",
+//     "browserTarget": "angular10Test1:build",
 //     "proxyConfig": "src/proxy.conf.json"
 //   },
 
