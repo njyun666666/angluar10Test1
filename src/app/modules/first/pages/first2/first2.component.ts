@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-first2',
@@ -7,9 +7,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class First2Component implements OnInit {
 
+  @Input() firstText1: string;
+  @Output() first2OutText = new EventEmitter<string>();
+
+
   constructor() { }
 
   ngOnInit() {
+    console.log(this.firstText1);
+
+    this.firstText1 = 'zzzzzzzzzzz';
+
+    this.first2OutText.emit('first2OutText first2OutText first2OutText');
+
   }
 
 }
