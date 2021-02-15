@@ -397,4 +397,148 @@ export class HomeComponent implements OnInit {
   }
 
 
+  exportJson() {
+    this.json_to_xlsx('exportJson', this.data);
+    // const workbook = this.json_to_Workbook(this.data);
+    // const worksheet = workbook.getWorksheet('Sheet1');
+    // const A1=worksheet.getCell('A1');
+    // console.log(A1);
+  }
+
+
+
+
+
+  json_to_Workbook(data: Array<{ [param: string]: any }>) {
+    const workbook = new Excel.Workbook();
+    const worksheet = workbook.addWorksheet('Sheet1');
+
+    let columns = [];
+    const cells = Object.keys(data[0]);
+
+    cells.forEach(x => {
+      columns.push({ header: x, key: x });
+    });
+
+    worksheet.columns = columns;
+    worksheet.addRows(data);
+
+    return workbook;
+  };
+
+
+  json_to_xlsx(fileName: string, data: Array<{ [param: string]: any }>) {
+
+    // export to file
+    this.json_to_Workbook(data).xlsx.writeBuffer().then((buffer) => {
+      const fileType = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';
+      const fileExtension = '.xlsx';
+      const blob = new Blob([buffer], { type: fileType });
+      saveAs(blob, fileName + fileExtension);
+    });
+
+
+  }
+
+
+
+
+
+
+
+  exportTable() {
+    const table = document.getElementById('demo-table');
+    // const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(table);
+
+  }
+
+
+
+  table_to_Workbook(table) {
+
+    const workbook = new Excel.Workbook();
+    const worksheet = workbook.addWorksheet('Sheet1');
+    let columns = [];
+
+
+    table = document.getElementById('demo-table');
+
+    let trs = table.getElementsByTagName('tr');
+
+    // tr
+    for (let i = 0; i < trs.length; i++) {
+      const tr = trs[i];
+      console.log(tr);
+
+
+      if (tr.style.display === 'none') {
+        continue;
+      }
+
+      const tds = tr.children;
+
+      // td
+      for (let j = 0; j < tds.length; j++) {
+        const td = tds[j];
+
+        if (td.style.display === 'none') {
+          continue;
+        }
+
+
+        // const val = this.htmldecode(td.innerHTML);
+        const val = td.innerHTML;
+
+
+
+
+
+        console.log(td);
+      } // end td
+
+
+    } // end tr
+
+
+
+
+
+    // let columns = [];
+    // const cells = Object.keys(obj[0]);
+
+    // cells.forEach(x => {
+    //   columns.push({ header: x, key: x });
+    // });
+
+    // worksheet.columns = columns;
+    // worksheet.addRows(obj);
+
+    // return workbook;
+  };
+
+
+  htmldecode = (function() {
+    var entities = [
+      ['nbsp', ' '], ['middot', '·'],
+      ['quot', '"'], ['apos', "'"], ['gt',   '>'], ['lt',   '<'], ['amp',  '&']
+    ].map(function(x) { return [new RegExp('&' + x[0] + ';', "ig"), x[1]]; });
+    return function htmldecode(str) {
+      var o = str
+          // Remove new lines and spaces from start of content
+          .replace(/^[\t\n\r ]+/, "")
+          // Remove new lines and spaces from end of content
+          .replace(/[\t\n\r ]+$/,"")
+          // Added line which removes any white space characters after and before html tags
+          .replace(/>\s+/g,">").replace(/\s+</g,"<")
+          // Replace remaining new lines and spaces with space
+          .replace(/[\t\n\r ]+/g, " ")
+          // Replace <br> tags with new lines
+          .replace(/<\s*[bB][rR]\s*\/?>/g,"\n")
+          // Strip HTML elements
+          .replace(/<[^>]*>/g,"");
+      for(var i = 0; i < entities.length; ++i) o = o.replace(entities[i][0], entities[i][1]);
+      return o;
+    };
+  })();
+
 }
