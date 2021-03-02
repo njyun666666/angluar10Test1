@@ -317,9 +317,19 @@ export class HomeComponent implements OnInit {
     const indexCol = worksheet.getColumn(2);
     const dateCol = worksheet.getColumn('Date');
 
+
+    nameCol.alignment = { horizontal: 'center' };
     indexCol.numFmt = '#,##0.00;[Red]\-#,##0.00';
 
 
+
+    let FillStyle = {
+      type: 'pattern',
+      pattern: 'solid',
+      fgColor: { argb: 'FFFF0000' },
+      bgColor: { argb: '00FFFF00' }
+    };
+  
 
     const row1 = worksheet.getRow(1);
     row1.fill = {
@@ -345,7 +355,47 @@ export class HomeComponent implements OnInit {
 
 
 
+  //   this.data.forEach((x, index) => {
 
+  //     const rowNumber = index + 2;
+
+  //     if (x.WorkTime > 7) {
+
+  //         const row1 = worksheet.getRow(rowNumber);
+  //         row1.fill = noReply7DayFill;
+
+  //     } else if (x.WorkTime > 3) {
+
+  //         const row1 = worksheet.getRow(rowNumber);
+  //         row1.fill = noReply3DayFill;
+  //     }
+
+  // });
+
+
+
+    // const dobCol = worksheet.getColumn('I');
+    // dobCol.eachCell(function (cell, rowNumber) {
+    //     console.log(cell);
+    //     console.log('rowNumber : ' + rowNumber + ' , ' + cell.value);
+
+    //     if (cell.value > 7) {
+
+    //         const row1 = worksheet.getRow(rowNumber);
+    //         row1.fill = noReply7DayFill;
+
+    //     } else if (cell.value > 3) {
+
+    //         const row1 = worksheet.getRow(rowNumber);
+    //         row1.fill = noReply3DayFill;
+    //     }
+
+    // });
+
+    // worksheet.eachRow(function (row, rowNumber) {
+    //     console.log(row);
+
+    // });
 
 
 
