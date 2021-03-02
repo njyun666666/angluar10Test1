@@ -37,7 +37,9 @@ export class HomeService {
 
     console.log('submit()');
     // const params = { Language: 1, Page: 25 };
-    return this.apiService.post(environment.apiUrl + '/api/Test/TestSingleFile', params);
+    return this.apiService.post(environment.apiUrl + '/api/Form/MultipleFile', params);
+    // return this.apiService.post(environment.apiUrl + '/api/Form/SingleFile', params);
+    // return this.apiService.post(environment.apiUrl + '/api/Test/TestSingleFile', params);
     // return this.apiService.post('/api/Test/TestSingleFile', params);
 
   }
