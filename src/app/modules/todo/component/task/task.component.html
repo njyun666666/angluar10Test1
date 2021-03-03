@@ -1,0 +1,38 @@
+<div class="card">
+    <div class="content">
+
+        <span>{{ in_subject }}</span>
+
+        <!-- [disabled]="task.state===TaskState.Finish" -->
+        <button type="button" [attr.disabled]="task.state===TaskState.Finish?'disabled':null">edit</button>
+
+        <!-- <span [style.color]="getStateColor()">{{ getStateDesc() }}</span> -->
+        <!-- <span [class.doing]="task.state===TaskState.Doing" [class.finish]="task.state===TaskState.Finish">
+            {{ getStateDesc() }}
+        </span> -->
+
+        <span [class]="{doing: task.state===TaskState.Doing, finish:task.state===TaskState.Finish}">
+            {{ getStateDesc() }}
+        </span>
+
+
+
+
+    </div>
+
+    <div class="button">
+        <span>
+            <button type="button" (click)="onSetTaskState(TaskState.None)">
+                未完成
+            </button>
+            <button type="button" (click)="onSetTaskState(TaskState.Doing)">
+                進行中
+            </button>
+            <button type="button" (click)="onSetTaskState(TaskState.Finish)">
+                已完成
+            </button>
+        </span>
+    </div>
+
+
+</div>

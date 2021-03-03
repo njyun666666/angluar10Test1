@@ -27,6 +27,11 @@ const routes: Routes = [
       { path: '', loadChildren: () => import('./modules/test1/test1.module').then(m => m.Test1Module) }
     ]
   },
+  {
+    path: 'todo', component: HeaderOnlyLayoutComponent, children: [
+      { path: '', loadChildren: () => import('./modules/todo/todo.module').then(m => m.TodoModule) }
+    ]
+  },
   // {
   //   path: 'first', component: MainLayoutComponent, children: [
   //     { path: '', loadChildren: () => import('./modules/first/first.module').then(m => m.FirstModule) },
