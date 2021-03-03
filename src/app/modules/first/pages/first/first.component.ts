@@ -8,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class FirstComponent implements OnInit {
 
   firstText1 = new Date().toISOString();
+  firstText2 = '123';
 
 
   One_List = ['a', 'b', 'c'];
@@ -25,6 +26,8 @@ export class FirstComponent implements OnInit {
   }
 
 
-
+  fromfirst2Emitter(event){
+    console.log(event);
+  }
 
 }

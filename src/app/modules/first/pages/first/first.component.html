@@ -1,6 +1,6 @@
 <p>first template!</p>
 {{firstText1}}
-<app-first2 [firstText1]="firstText1" (first2OutText)="first2OutText($event)"></app-first2>
+<app-first2 [firstText1]="firstText1" [firstText2]="firstText2" (first2OutText)="first2OutText($event)"   (first2Emitter)="fromfirst2Emitter($event)" ></app-first2>
 
 <br><br>
 

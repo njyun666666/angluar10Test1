@@ -126,6 +126,7 @@ export class HomeComponent implements OnInit {
     // formData.append('file', document.getElementById('file')[0]);
 
 
+    // var reader = new FileReader();
 
 
     this.homeService.submit(formData).subscribe(result => {
