@@ -354,6 +354,17 @@ export class HomeComponent implements OnInit {
 
     worksheet.addRows(this.data);
 
+    const dobCol_C = worksheet.getColumn('C');
+    dobCol_C.eachCell(function (cell, rowNumber) {
+
+        console.log(cell);
+        console.log('rowNumber : ' + rowNumber + ' , ' + cell.value);
+
+        if (rowNumber > 1 && cell.value != null) {
+            cell.value = new Date(cell.value.toString());
+        }
+
+    });
 
 
   //   this.data.forEach((x, index) => {
