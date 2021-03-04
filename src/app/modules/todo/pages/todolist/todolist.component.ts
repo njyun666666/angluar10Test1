@@ -59,7 +59,7 @@ export class TodolistComponent implements OnInit {
 
   onStateChanges(state: TaskState): void {
     this.selectedTask.state = state;
-    console.log('todolist: onStateChanges: ' + state);
+    // console.log('todolist: onStateChanges: ' + state);
   }
 
   get completeRate(): number {
@@ -67,10 +67,18 @@ export class TodolistComponent implements OnInit {
       task.state === TaskState.Finish
     ).length;
 
-    console.log('completeCount: ' + completeCount);
+    // console.log('completeCount: ' + completeCount);
     return completeCount / this.tasks.length || 0;
   }
 
+  onAdd() {
+
+    const task = new Task('new task');
+    task.level = "S";
+    task.tags = ["feature"];
+    this.tasks.push(task);
+
+  }
 
 
 }

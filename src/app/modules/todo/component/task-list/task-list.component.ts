@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { Task } from '../../models/task';
 
 @Component({
@@ -6,13 +6,19 @@ import { Task } from '../../models/task';
   templateUrl: './task-list.component.html',
   styleUrls: ['./task-list.component.scss']
 })
-export class TaskListComponent implements OnInit {
+export class TaskListComponent implements OnInit, OnChanges {
 
   @Input() tasks: Task[];
 
   constructor() { }
 
   ngOnInit(): void {
+    console.log("TaskListComponent - ngOnInit");
+  }
+
+
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log('TaskListComponent - ngOnChanges', changes);
   }
 
 }

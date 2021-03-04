@@ -61,8 +61,8 @@ export class TaskComponent implements OnInit, OnChanges {
     this.task = new Task(this.in_subject);
 
 
-    console.log('ngOnInit :');
-    console.log(this.state);
+    // console.log('ngOnInit :');
+    // console.log(this.state);
     this.stateDesc = this.getStateDesc();
     // this.state = TaskState.Finish;
     // this.stateChange.emit(this.state);
@@ -73,7 +73,7 @@ export class TaskComponent implements OnInit, OnChanges {
 
   ngOnChanges(): void {
     this.stateDesc = this.getStateDesc();
-    console.log('ngOnChanges stateDesc: ' + this.stateDesc);
+    // console.log('ngOnChanges stateDesc: ' + this.stateDesc);
 
     this.stateClass = {
       doing: this.state === TaskState.Doing,
@@ -103,7 +103,7 @@ export class TaskComponent implements OnInit, OnChanges {
 
   onSetTaskState(state: TaskState): void {
     // this._state = state;
-    console.log('task onSetTaskState');
+    // console.log('task onSetTaskState');
     this.stateChange.emit(state);
     // this.out_stateChange.emit(state);
   }
