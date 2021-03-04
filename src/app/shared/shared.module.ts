@@ -4,11 +4,12 @@ import { LayoutModule } from './modules/layout/layout.module';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LanguageModule } from './modules/language/language.module';
+import { TaiwanDatePipe } from './pipe/taiwan-date.pipe';
 
 
 
 @NgModule({
-  declarations: [],
+  declarations: [TaiwanDatePipe],
   imports: [
     CommonModule,
     LayoutModule,
@@ -19,7 +20,8 @@ import { LanguageModule } from './modules/language/language.module';
   ],
   exports: [
     ReactiveFormsModule,
-    LanguageModule
+    LanguageModule,
+    TaiwanDatePipe
   ],
   providers: []
 })

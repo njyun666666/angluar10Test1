@@ -7,4 +7,10 @@ export class Task {
         public state: TaskState = TaskState.None
     ) { }
 
+    level?: "XS" | "S" | "M" | "L" | "XL";
+    tags?: string[];
+    expectDate?: Date;
+    finishedDate?: Date;
+
+
 }

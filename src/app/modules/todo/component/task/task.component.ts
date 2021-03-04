@@ -1,7 +1,7 @@
 import { Task } from './../../models/task';
 import { TaskState } from './../../enum/task-state.enum';
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
-import { stat } from 'fs';
+
 
 
 @Component({
@@ -14,7 +14,7 @@ export class TaskComponent implements OnInit, OnChanges {
   task: Task;
   TaskState = TaskState;
   stateDesc: string;
-
+  stateClass: { [key: string]: boolean };
 
 
   @Input() in_subject: string;
@@ -40,10 +40,17 @@ export class TaskComponent implements OnInit, OnChanges {
 
 
 
+  /** from task-list */
+  @Input() subject: string;
+
   @Input() state: TaskState;
   @Output() stateChange = new EventEmitter<TaskState>();
 
-
+  @Input() level: "XS" | "S" | "M" | "L" | "XL";
+  @Input() tags: string[];
+  @Input() expectDate: Date;
+  @Input() finishedDate: Date;
+  /** end from task-list */
 
 
 
@@ -51,11 +58,12 @@ export class TaskComponent implements OnInit, OnChanges {
   constructor() { }
 
   ngOnInit(): void {
-    this.task = new Task("task title");
+    this.task = new Task(this.in_subject);
 
 
     console.log('ngOnInit :');
     console.log(this.state);
+    this.stateDesc = this.getStateDesc();
     // this.state = TaskState.Finish;
     // this.stateChange.emit(this.state);
 
@@ -66,11 +74,21 @@ export class TaskComponent implements OnInit, OnChanges {
   ngOnChanges(): void {
     this.stateDesc = this.getStateDesc();
     console.log('ngOnChanges stateDesc: ' + this.stateDesc);
+
+    this.stateClass = {
+      doing: this.state === TaskState.Doing,
+      finish: this.state === TaskState.Finish
+    };
+
+
+
+
+
   }
 
 
   getStateDesc(): string {
-    switch (this._state) {
+    switch (this.state) {
       case TaskState.None:
         return "none";
       case TaskState.Doing:
@@ -92,7 +110,7 @@ export class TaskComponent implements OnInit, OnChanges {
 
 
   getStateColor(): string {
-    switch (this._state) {
+    switch (this.state) {
       case TaskState.Doing:
         return "green";
       case TaskState.Finish:

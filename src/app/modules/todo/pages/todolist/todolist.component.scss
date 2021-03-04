@@ -1,7 +1,13 @@
 div {
     padding: 20px 10px;
+    display: flex;
+    justify-content: space-between;
 }
 
 div button {
     margin-right: 5px;
+}
+
+div span:last-child {
+    font-size: 12pt;
 }

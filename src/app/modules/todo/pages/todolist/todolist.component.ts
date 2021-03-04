@@ -9,7 +9,7 @@ import { Task } from '../../models/task';
 })
 export class TodolistComponent implements OnInit {
 
-  task: Task;
+  // task: Task;
   tasks: Task[];
   selectedTask: Task;
 
@@ -17,16 +17,40 @@ export class TodolistComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.task = new Task('show todo title (from TodolistComponent)', TaskState.Doing);
-    this.tasks = [
-      new Task("頁面需要顯示待辦事項主旨"),
-      new Task("可以設定待辦事項的狀態", TaskState.Doing),
-      new Task("當待辦事項狀態為已完的事項無法編輯事項", TaskState.Finish),
-    ];
-
-    this.onSelectTask(1);
+    // this.task = new Task('show todo title (from TodolistComponent)', TaskState.Doing);
+    this.onLoad();
+    // this.onSelectTask(0);
 
   }
+
+  onLoad() {
+    this.tasks = [
+      new Task("task 1111111111111111"),
+      new Task("task 2", TaskState.Doing),
+      new Task("task 3", TaskState.Finish),
+    ];
+
+    this.tasks[0].level = "XS";
+    this.tasks[0].tags = ["FEATURE", "ISSUE", "enhancement", "discussion"];
+
+
+    this.tasks[1].level = "S";
+    this.tasks[1].tags = ["Feature", "Issue", "document"];
+    this.tasks[1].expectDate = new Date(2021, 3, 10);
+
+    this.tasks[2].level = "M";
+    this.tasks[2].tags = ["feature", "issue"];
+    this.tasks[2].expectDate = new Date(2021, 3, 20);
+    this.tasks[2].finishedDate = new Date(2021, 3, 20);
+
+
+  }
+
+  onClear() {
+    this.tasks = [];
+  }
+
+
 
 
   onSelectTask(index: number): void {
@@ -37,5 +61,16 @@ export class TodolistComponent implements OnInit {
     this.selectedTask.state = state;
     console.log('todolist: onStateChanges: ' + state);
   }
+
+  get completeRate(): number {
+    const completeCount = this.tasks.filter((task) =>
+      task.state === TaskState.Finish
+    ).length;
+
+    console.log('completeCount: ' + completeCount);
+    return completeCount / this.tasks.length || 0;
+  }
+
+
 
 }

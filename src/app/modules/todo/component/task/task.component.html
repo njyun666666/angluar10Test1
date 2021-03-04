@@ -1,24 +1,37 @@
 <div class="card">
     <div class="content">
 
-        <span>{{ in_subject }}</span>
+        <span>{{ subject | slice:0:10 }}<span *ngIf="subject.length>10">...</span> </span>
 
         <!-- [disabled]="task.state===TaskState.Finish" -->
-        <button type="button" [attr.disabled]="task.state===TaskState.Finish?'disabled':null">edit</button>
+        <button type="button" [attr.disabled]="state===TaskState.Finish?'disabled':null">edit</button>
 
         <!-- <span [style.color]="getStateColor()">{{ getStateDesc() }}</span> -->
         <!-- <span [class.doing]="task.state===TaskState.Doing" [class.finish]="task.state===TaskState.Finish">
             {{ getStateDesc() }}
         </span> -->
 
-        <span [class]="{doing: task.state===TaskState.Doing, finish:task.state===TaskState.Finish}">
-            {{ getStateDesc() }}
+        <!-- <span [class]="{doing: state===TaskState.Doing, finish:state===TaskState.Finish}">
+            {{ stateDesc }}
+        </span> -->
+
+        <span [ngClass]="stateClass">
+            {{ stateDesc }}
         </span>
 
+        <span [appTaskStateColor]="state">{{stateDesc}}</span>
 
 
 
     </div>
+
+
+    <div class="tags">
+        <span class="tag" *ngFor="let tag of tags | slice: 0:2 ">{{ tag | titlecase }}</span>
+        <span *ngIf="tags.length>2">({{tags.length-2}})</span>
+    </div>
+
+
 
     <div class="button">
         <span>
@@ -32,6 +45,25 @@
                 已完成
             </button>
         </span>
+
+
+
+        <span [ngSwitch]="state">
+
+            <ng-container *ngSwitchCase="TaskState.Doing">
+                預計完成日期：{{expectDate | date:'yyyy-MM-dd HH:mm:ss':'+0000' }}
+            </ng-container>
+            <ng-container *ngSwitchCase="TaskState.Finish">
+                實際完成日期：{{finishedDate | date:'yyyy-MM-dd HH:mm:ss'}} {{finishedDate |taiwanDate}}
+            </ng-container>
+            <ng-container *ngSwitchDefault>
+                預估等級：{{level}}
+            </ng-container>
+
+        </span>
+
+
+
     </div>
 
 

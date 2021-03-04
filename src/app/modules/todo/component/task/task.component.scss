@@ -29,3 +29,24 @@ span.doing {
 span.finish {
     color: blue;
 }
+:host(.odd) div.card {
+    background-color: cornsilk;
+}
+div.card div.tags {
+    padding: 10px;
+    border-bottom: solid 1px #ccc;
+}
+
+div.card div.tags span {
+    display: inline-block;
+    margin-right: 5px;
+    padding: 0 10px;
+    line-height: 20pt;
+    font-size: 10pt;
+}
+
+div.card div.tags span.tag {
+    background-color: navy;
+    color: white;
+    font-weight: bold;
+}

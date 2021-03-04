@@ -1,12 +1,32 @@
 <p>todolist works!</p>
 
-<div>
+<!-- <div>
     <button type="button" (click)="onSelectTask(0)">未完成事項</button>
     <button type="button" (click)="onSelectTask(1)">工作中事項</button>
     <button type="button" (click)="onSelectTask(2)">已完成事項</button>
-</div>
+</div> -->
 
 <!-- <app-task [in_subject]="selectedTask.subject" [in_state]="selectedTask.state" (out_stateChange)="onStateChanges($event)"></app-task> -->
-<app-task [in_subject]="selectedTask.subject" [(state)]="selectedTask.state"></app-task>
+<!-- <app-task [in_subject]="selectedTask.subject" [(state)]="selectedTask.state"></app-task> -->
 
-{{selectedTask.state}}
+<!-- {{selectedTask.state}} -->
+
+<div>
+    <span>
+        <button type="button" (click)="onLoad()">載入資料</button>
+        <button type="button" (click)="onClear()">清空資料</button>
+    </span>
+    <span>complete: {{completeRate | percent :'1.0-2'}} </span>
+</div>
+
+<app-task-list [tasks]="tasks"></app-task-list>
+
+
+{{10000000 |currency:'TWD'}}
+
+<br>
+
+{{10000000 |number:'1.2'}}
+
+
+<pre>{{tasks|json}} </pre>
