@@ -1,3 +1,4 @@
+import { UiModule } from './../ui/ui.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -14,7 +15,8 @@ import { SharedModule } from 'src/app/shared/shared.module';
   imports: [
     CommonModule,
     SharedModule,
-    TodoRoutingModule
+    TodoRoutingModule,
+    UiModule
   ],
   exports: [TaskListComponent]
 })

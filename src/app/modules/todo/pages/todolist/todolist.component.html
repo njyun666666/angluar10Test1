@@ -1,4 +1,5 @@
-<p>todolist works!</p>
+<p class="compentent-title">todolist works!</p>
+
 
 <!-- <div>
     <button type="button" (click)="onSelectTask(0)">未完成事項</button>
@@ -11,17 +12,26 @@
 
 <!-- {{selectedTask.state}} -->
 
-<div>
-    <span>
-        <button type="button" (click)="onLoad()">載入資料</button>
-        <button type="button" (click)="onClear()">清空資料</button>
-        <button type="button" (click)="onAdd()">Add</button>
-    </span>
-    <span>complete: {{completeRate | percent :'1.0-2'}} </span>
-</div>
 
-<app-task-list [tasks]="tasks"></app-task-list>
+<app-page-container>
 
+    <app-page-title pageTitle="todo list"></app-page-title>
+
+    <div>
+        <span>
+            <button type="button" (click)="onLoad()">載入資料</button>
+            <button type="button" (click)="onClear()">清空資料</button>
+            <button type="button" (click)="onAdd()">Add</button>
+        </span>
+        <span>complete: {{completeRate | percent :'1.0-2'}} </span>
+    </div>
+
+    <app-task-list [tasks]="tasks"></app-task-list>
+
+</app-page-container>
+
+
+<br><br>
 
 {{10000000 |currency:'TWD'}}
 
