@@ -6,7 +6,7 @@ import { Directive, ElementRef, Input, OnChanges, Renderer2 } from '@angular/cor
 })
 export class TaskStateColorDirective implements OnChanges {
 
-  @Input("appTaskStateColor") state: TaskState;
+  @Input('appTaskStateColor') state: TaskState;
 
   constructor(private elRef: ElementRef, private renderer: Renderer2) { }
 
@@ -20,7 +20,7 @@ export class TaskStateColorDirective implements OnChanges {
 
 
   private clearElementClass() {
-    const classNames = ["none", "doing", "finish"];
+    const classNames = ['none', 'doing', 'finish'];
 
     classNames.forEach((className) =>
       this.renderer.removeClass(this.elRef.nativeElement, className)
@@ -34,13 +34,13 @@ export class TaskStateColorDirective implements OnChanges {
 
     switch (this.state) {
       case TaskState.None:
-        className = "none";
+        className = 'none';
         break;
       case TaskState.Doing:
-        className = "doing";
+        className = 'doing';
         break;
       case TaskState.Finish:
-        className = "finish";
+        className = 'finish';
         break;
       default:
         break;

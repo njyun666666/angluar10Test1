@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild, ViewChildren } from '@angular/core';
+import { TaskListComponent } from '../../component/task-list/task-list.component';
 import { TaskState } from '../../enum/task-state.enum';
 import { Task } from '../../models/task';
 
@@ -7,7 +8,10 @@ import { Task } from '../../models/task';
   templateUrl: './todolist.component.html',
   styleUrls: ['./todolist.component.scss']
 })
-export class TodolistComponent implements OnInit {
+export class TodolistComponent implements OnInit, AfterViewInit {
+
+  // @ViewChild(TaskListComponent) taskList: TaskListComponent;
+  @ViewChildren(TaskListComponent) taskList2: TaskListComponent;
 
   // task: Task;
   tasks: Task[];
@@ -18,33 +22,40 @@ export class TodolistComponent implements OnInit {
   ngOnInit(): void {
 
     // this.task = new Task('show todo title (from TodolistComponent)', TaskState.Doing);
-    this.onLoad();
+    // this.onLoad();
     // this.onSelectTask(0);
 
-  }
-
-  onLoad() {
-    this.tasks = [
-      new Task("task 1111111111111111"),
-      new Task("task 2", TaskState.Doing),
-      new Task("task 3", TaskState.Finish),
-    ];
-
-    this.tasks[0].level = "XS";
-    this.tasks[0].tags = ["FEATURE", "ISSUE", "enhancement", "discussion"];
-
-
-    this.tasks[1].level = "S";
-    this.tasks[1].tags = ["Feature", "Issue", "document"];
-    this.tasks[1].expectDate = new Date(2021, 3, 10);
-
-    this.tasks[2].level = "M";
-    this.tasks[2].tags = ["feature", "issue"];
-    this.tasks[2].expectDate = new Date(2021, 3, 20);
-    this.tasks[2].finishedDate = new Date(2021, 3, 20);
-
+    console.log('todolistComponent - ngOnInit', this.taskList2);
 
   }
+
+  ngAfterViewInit(): void {
+    console.log('todolistComponent - ngAfterViewInit', this.taskList2);
+  }
+
+
+  // onLoad() {
+  //   this.tasks = [
+  //     new Task('task 1111111111111111'),
+  //     new Task('task 2', TaskState.Doing),
+  //     new Task('task 3', TaskState.Finish),
+  //   ];
+
+  //   this.tasks[0].level = 'XS';
+  //   this.tasks[0].tags = ['FEATURE', 'ISSUE', 'enhancement', 'discussion'];
+
+
+  //   this.tasks[1].level = 'S';
+  //   this.tasks[1].tags = ['Feature', 'Issue', 'document'];
+  //   this.tasks[1].expectDate = new Date(2021, 3, 10);
+
+  //   this.tasks[2].level = 'M';
+  //   this.tasks[2].tags = ['feature', 'issue'];
+  //   this.tasks[2].expectDate = new Date(2021, 3, 20);
+  //   this.tasks[2].finishedDate = new Date(2021, 3, 20);
+
+
+  // }
 
   onClear() {
     this.tasks = [];
@@ -63,19 +74,25 @@ export class TodolistComponent implements OnInit {
   }
 
   get completeRate(): number {
-    const completeCount = this.tasks.filter((task) =>
-      task.state === TaskState.Finish
-    ).length;
 
-    // console.log('completeCount: ' + completeCount);
-    return completeCount / this.tasks.length || 0;
+    // console.log(this.tasks);
+    if (this.tasks && this.tasks.length > 0) {
+      const completeCount = this.tasks.filter((task) =>
+        task.state === TaskState.Finish
+      ).length;
+
+      // console.log('completeCount: ' + completeCount);
+      return completeCount / this.tasks.length || 0;
+    }
+
+    return 0;
   }
 
   onAdd() {
 
-    const task = new Task('new task');
-    task.level = "S";
-    task.tags = ["feature"];
+    const task = new Task(99, 'new task');
+    task.level = 'S';
+    task.tags = ['feature'];
     this.tasks.push(task);
 
   }

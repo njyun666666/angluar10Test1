@@ -1,3 +1,4 @@
+import { TaskLocalService } from './../../services/task-local.service';
 import { Component, DoCheck, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { Task } from '../../models/task';
 
@@ -6,14 +7,23 @@ import { Task } from '../../models/task';
   templateUrl: './task-list.component.html',
   styleUrls: ['./task-list.component.scss']
 })
-export class TaskListComponent implements OnInit, OnChanges, DoCheck {
+export class TaskListComponent implements OnInit, OnChanges { // , DoCheck
 
-  @Input() tasks: Task[];
+  // @Input() tasks: Task[];
+  a = 'text from TaskListComponent';
 
-  constructor() { }
+  tasks: Task[];
+
+
+  constructor(private taskService: TaskLocalService) { }
 
   ngOnInit(): void {
-    console.log("TaskListComponent - ngOnInit");
+    console.log('TaskListComponent - ngOnInit');
+
+
+    this.taskService.getTodoTask().subscribe((result) => { this.tasks = result.data; });
+
+
   }
 
 
@@ -21,8 +31,8 @@ export class TaskListComponent implements OnInit, OnChanges, DoCheck {
     console.log('TaskListComponent - ngOnChanges', changes);
   }
 
-  ngDoCheck(): void {
-    console.log("TaskListComponent - ngDoCheck", this.tasks.length);
-  }
+  // ngDoCheck(): void {
+  //   console.log("TaskListComponent - ngDoCheck", this.tasks.length);
+  // }
 
 }

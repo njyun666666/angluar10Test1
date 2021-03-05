@@ -19,15 +19,17 @@
 
     <div>
         <span>
-            <button type="button" (click)="onLoad()">載入資料</button>
+            <!-- <button type="button" (click)="onLoad()">載入資料</button> -->
             <button type="button" (click)="onClear()">清空資料</button>
             <button type="button" (click)="onAdd()">Add</button>
         </span>
         <span>complete: {{completeRate | percent :'1.0-2'}} </span>
     </div>
 
-    <app-task-list [tasks]="tasks"></app-task-list>
+    <app-task-list #list ></app-task-list>
+    <!-- <app-task-list #list2 [tasks]="tasks"></app-task-list> -->
 
+    
 </app-page-container>
 
 
@@ -39,5 +41,14 @@
 
 {{10000000 |number:'1.2'}}
 
+<br><br>
+
+{{list.a}}
+
+<br><br>
+
+{{list.tasks|json}}
+
+<br><br>
 
 <pre>{{tasks|json}} </pre>

@@ -330,7 +330,7 @@ export class HomeComponent implements OnInit {
       fgColor: { argb: 'FFFF0000' },
       bgColor: { argb: '00FFFF00' }
     };
-  
+
 
     const row1 = worksheet.getRow(1);
     row1.fill = {
@@ -357,32 +357,32 @@ export class HomeComponent implements OnInit {
     const dobCol_C = worksheet.getColumn('C');
     dobCol_C.eachCell(function (cell, rowNumber) {
 
-        console.log(cell);
-        console.log('rowNumber : ' + rowNumber + ' , ' + cell.value);
+      console.log(cell);
+      console.log('rowNumber : ' + rowNumber + ' , ' + cell.value);
 
-        if (rowNumber > 1 && cell.value != null) {
-            cell.value = new Date(cell.value.toString());
-        }
+      if (rowNumber > 1 && cell.value != null) {
+        cell.value = new Date(cell.value.toString());
+      }
 
     });
 
 
-  //   this.data.forEach((x, index) => {
+    //   this.data.forEach((x, index) => {
 
-  //     const rowNumber = index + 2;
+    //     const rowNumber = index + 2;
 
-  //     if (x.WorkTime > 7) {
+    //     if (x.WorkTime > 7) {
 
-  //         const row1 = worksheet.getRow(rowNumber);
-  //         row1.fill = noReply7DayFill;
+    //         const row1 = worksheet.getRow(rowNumber);
+    //         row1.fill = noReply7DayFill;
 
-  //     } else if (x.WorkTime > 3) {
+    //     } else if (x.WorkTime > 3) {
 
-  //         const row1 = worksheet.getRow(rowNumber);
-  //         row1.fill = noReply3DayFill;
-  //     }
+    //         const row1 = worksheet.getRow(rowNumber);
+    //         row1.fill = noReply3DayFill;
+    //     }
 
-  // });
+    // });
 
 
 
@@ -579,26 +579,26 @@ export class HomeComponent implements OnInit {
   };
 
 
-  htmldecode = (function() {
+  htmldecode = (function () {
     var entities = [
       ['nbsp', ' '], ['middot', '·'],
-      ['quot', '"'], ['apos', "'"], ['gt',   '>'], ['lt',   '<'], ['amp',  '&']
-    ].map(function(x) { return [new RegExp('&' + x[0] + ';', "ig"), x[1]]; });
+      ['quot', '"'], ['apos', "'"], ['gt', '>'], ['lt', '<'], ['amp', '&']
+    ].map(function (x) { return [new RegExp('&' + x[0] + ';', "ig"), x[1]]; });
     return function htmldecode(str) {
       var o = str
-          // Remove new lines and spaces from start of content
-          .replace(/^[\t\n\r ]+/, "")
-          // Remove new lines and spaces from end of content
-          .replace(/[\t\n\r ]+$/,"")
-          // Added line which removes any white space characters after and before html tags
-          .replace(/>\s+/g,">").replace(/\s+</g,"<")
-          // Replace remaining new lines and spaces with space
-          .replace(/[\t\n\r ]+/g, " ")
-          // Replace <br> tags with new lines
-          .replace(/<\s*[bB][rR]\s*\/?>/g,"\n")
-          // Strip HTML elements
-          .replace(/<[^>]*>/g,"");
-      for(var i = 0; i < entities.length; ++i) o = o.replace(entities[i][0], entities[i][1]);
+        // Remove new lines and spaces from start of content
+        .replace(/^[\t\n\r ]+/, "")
+        // Remove new lines and spaces from end of content
+        .replace(/[\t\n\r ]+$/, "")
+        // Added line which removes any white space characters after and before html tags
+        .replace(/>\s+/g, ">").replace(/\s+</g, "<")
+        // Replace remaining new lines and spaces with space
+        .replace(/[\t\n\r ]+/g, " ")
+        // Replace <br> tags with new lines
+        .replace(/<\s*[bB][rR]\s*\/?>/g, "\n")
+        // Strip HTML elements
+        .replace(/<[^>]*>/g, "");
+      for (var i = 0; i < entities.length; ++i) o = o.replace(entities[i][0], entities[i][1]);
       return o;
     };
   })();

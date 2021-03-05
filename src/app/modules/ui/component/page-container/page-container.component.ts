@@ -9,7 +9,7 @@ import { PageTitleComponent } from '../page-title/page-title.component';
 export class PageContainerComponent implements OnInit, DoCheck, AfterContentInit, AfterContentChecked {
 
   @ContentChild(PageTitleComponent) title: HTMLElement;
-  
+  // @ContentChildren(PageTitleComponent) titleList: HTMLElement;
 
   constructor() { }
 
@@ -21,14 +21,10 @@ export class PageContainerComponent implements OnInit, DoCheck, AfterContentInit
   }
 
   ngAfterContentInit(): void {
-    //Called after ngOnInit when the component's or directive's content has been initialized.
-    //Add 'implements AfterContentInit' to the class.
     console.log('ngAfterContentInit', this.title);
 
   }
   ngAfterContentChecked(): void {
-    //Called after every check of the component's or directive's content.
-    //Add 'implements AfterContentChecked' to the class.
     console.log('ngAfterContentChecked');
   }
 

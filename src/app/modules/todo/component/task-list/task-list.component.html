@@ -7,7 +7,7 @@
 
 
 <ng-template #list>
-    <app-task *ngFor="let task of tasks; let i=index" [class.odd]="i%2===1" [in_subject]="task.subject"
+    <app-task *ngFor="let task of tasks; let i=index" [class.odd]="i%2===1" 
         [subject]="task.subject" [(state)]="task.state" [level]="task.level" [tags]="task.tags" [expectDate]="task.expectDate"
         [finishedDate]="task.finishedDate"></app-task>
     <!-- [class.odd]="odd" -->

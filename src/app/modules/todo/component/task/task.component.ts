@@ -17,7 +17,7 @@ export class TaskComponent implements OnInit, OnChanges {
   stateClass: { [key: string]: boolean };
 
 
-  @Input() in_subject: string;
+  // @Input() in_subject: string;
   // @Input() in_state: TaskState;
 
   private _state: TaskState;
@@ -58,7 +58,7 @@ export class TaskComponent implements OnInit, OnChanges {
   constructor() { }
 
   ngOnInit(): void {
-    this.task = new Task(this.in_subject);
+    // this.task = new Task(this.in_subject);
 
 
     // console.log('ngOnInit :');
