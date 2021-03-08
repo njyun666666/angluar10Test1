@@ -6,6 +6,25 @@
 </ng-template>
 
 
+
+<div class="search">
+    <div>
+        <div class="input">
+            <!-- <input type="text" [(ngModel)]="subject" placeholder="subject" /> -->
+            <input type="text" #subject="ngModel" ngModel placeholder="subject" />
+        </div>
+        <div class="button">
+            <button (click)="onSearch(subject)">Search</button>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
 <ng-template #list>
     <app-task *ngFor="let task of taskList$.data; let i=index" [class.odd]="i%2===1" [subject]="task.subject"
         [(state)]="task.state" [level]="task.level" [tags]="task.tags" [expectDate]="task.expectDate"

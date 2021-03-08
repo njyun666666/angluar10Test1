@@ -17,15 +17,15 @@ export class PageContainerComponent implements OnInit, DoCheck, AfterContentInit
   }
 
   ngDoCheck(): void {
-    console.log('ngDoCheck');
+    // console.log('ngDoCheck');
   }
 
   ngAfterContentInit(): void {
-    console.log('ngAfterContentInit', this.title);
+    // console.log('ngAfterContentInit', this.title);
 
   }
   ngAfterContentChecked(): void {
-    console.log('ngAfterContentChecked');
+    // console.log('ngAfterContentChecked');
   }
 
 

@@ -19,6 +19,7 @@ import { TaiwanDatePipe } from './pipe/taiwan-date.pipe';
     LanguageModule
   ],
   exports: [
+    FormsModule,
     ReactiveFormsModule,
     LanguageModule,
     TaiwanDatePipe,

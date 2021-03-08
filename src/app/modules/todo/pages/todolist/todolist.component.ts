@@ -26,12 +26,12 @@ export class TodolistComponent implements OnInit, AfterViewInit {
     // this.onLoad();
     // this.onSelectTask(0);
 
-    console.log('todolistComponent - ngOnInit', this.taskList2);
+    // console.log('todolistComponent - ngOnInit', this.taskList2);
 
   }
 
   ngAfterViewInit(): void {
-    console.log('todolistComponent - ngAfterViewInit', this.taskList2);
+    // console.log('todolistComponent - ngAfterViewInit', this.taskList2);
   }
 
 

@@ -8,6 +8,7 @@ import { TodolistComponent } from './pages/todolist/todolist.component';
 import { TaskStateColorDirective } from './directive/task-state-color.directive';
 import { TaskListComponent } from './component/task-list/task-list.component';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
