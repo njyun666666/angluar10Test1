@@ -1,6 +1,18 @@
 
 <p>home works!</p>
+<div>
 
+  <br><br>
+  {{ 'home' | language : this.languageService.changeLang }}
+  <br>
+  {{ 'text' | language : this.languageService.changeLang }}
+  <br>
+  
+  {{this.languageService.langText.home}}
+  
+</div>
+
+<br><br><br>
 
 <button type="button" (click)='getTest()'>get test</button>
 
@@ -29,13 +41,7 @@
 
 </form>
 
-<br><br>
-{{ 'home' | language : this.languageService.changeLang }}
-<br>
-{{ 'text' | language : this.languageService.changeLang }}
-<br>
 
-<!-- {{this.languageService.langText["home"]}} -->
 
 <br><br>
 <button (click)="getLangServiceLang()">getLangServiceLang</button>

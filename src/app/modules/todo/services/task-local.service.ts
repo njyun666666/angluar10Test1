@@ -4,6 +4,7 @@ import { ApiService } from 'src/app/core/services/api.service';
 import { environment } from 'src/environments/environment';
 import { TaskState } from '../enum/task-state.enum';
 import { Task } from '../models/task';
+import { ResponseModel } from '../../../shared/model/response-model';
 
 @Injectable({
   providedIn: 'root'
@@ -45,8 +46,8 @@ export class TaskLocalService {
   }
 
 
-  getTodoTask() {
-    // :Observable<>
+  getTodoTask(): Observable<ResponseModel<Task[]>> {
+    // :Observable<ResponseModel>
     // let data;
 
     // this.apiSerivce.get(environment.apiUrl + '/api/Todo/Get').subscribe(result => {

@@ -1,3 +1,4 @@
+import { CounterService } from './../../../../shared/services/counter.service';
 import { AfterViewInit, Component, OnInit, ViewChild, ViewChildren } from '@angular/core';
 import { TaskListComponent } from '../../component/task-list/task-list.component';
 import { TaskState } from '../../enum/task-state.enum';
@@ -17,7 +18,7 @@ export class TodolistComponent implements OnInit, AfterViewInit {
   tasks: Task[];
   selectedTask: Task;
 
-  constructor() { }
+  constructor(public counterService: CounterService) { }
 
   ngOnInit(): void {
 

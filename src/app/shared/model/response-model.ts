@@ -1,6 +1,6 @@
-export class ResponseModel {
+export class ResponseModel<T> {
     code: number;
     message: string;
     timestamp: number;
-    data?: object;
+    data?: T | any;
 }

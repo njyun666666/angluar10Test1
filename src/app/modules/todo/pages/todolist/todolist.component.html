@@ -26,10 +26,10 @@
         <span>complete: {{completeRate | percent :'1.0-2'}} </span>
     </div>
 
-    <app-task-list #list ></app-task-list>
+    <app-task-list #list></app-task-list>
     <!-- <app-task-list #list2 [tasks]="tasks"></app-task-list> -->
 
-    
+
 </app-page-container>
 
 
@@ -47,8 +47,15 @@
 
 <br><br>
 
-{{list.tasks|json}}
+<pre>{{list.taskList$|json}}</pre>
 
 <br><br>
 
 <pre>{{tasks|json}} </pre>
+
+<br><br>
+
+<div>
+    <strong>TotolistComponent</strong>
+    <button type="button" (click)="counterService.add()">add {{counterService.count}} </button>
+</div>
