@@ -1,0 +1,25 @@
+<form [formGroup]="form">
+    <div class="form-field">
+        <label>subject</label>
+        <input type="text" formControlName="subject" />
+    </div>
+
+    <div class="form-field">
+        <label>level</label>
+        <select formControlName="level">
+            <option value=""></option>
+            <option value="XS">XS</option>
+            <option value="S">S</option>
+            <option value="M">M</option>
+            <option value="L">L</option>
+            <option value="XL">XL</option>
+        </select>
+    </div>
+
+</form>
+
+<br>
+
+<pre>{{form.value | json }}</pre>
+
+

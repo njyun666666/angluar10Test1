@@ -1,0 +1,22 @@
+form {
+    padding: 20px;
+}
+
+div.form-field {
+    padding: 10px 20px 10px 0;
+    margin: 5px 0;
+    display: flex;
+}
+
+div.form-field label {
+    display: inline-block;
+    width: 80px;
+    height: 22px;
+    line-height: 22px;
+    text-align: center;
+}
+
+div.form-field input,
+div.form-field select {
+    flex-grow: 1;
+}

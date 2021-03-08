@@ -9,10 +9,11 @@ import { TaskStateColorDirective } from './directive/task-state-color.directive'
 import { TaskListComponent } from './component/task-list/task-list.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { FormsModule } from '@angular/forms';
+import { TaskFormComponent } from './component/task-form/task-form.component';
 
 
 @NgModule({
-  declarations: [TaskComponent, TodolistComponent, TaskStateColorDirective, TaskListComponent],
+  declarations: [TaskComponent, TodolistComponent, TaskStateColorDirective, TaskListComponent, TaskFormComponent],
   imports: [
     CommonModule,
     SharedModule,
