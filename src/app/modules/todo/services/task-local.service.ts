@@ -46,7 +46,7 @@ export class TaskLocalService {
   }
 
 
-  getTodoTask(subject?: string, state?: number): Observable<ResponseModel<Task[]>> {
+  getTodoTask(para: { [param: string]: any; }): Observable<ResponseModel<Task[]>> {
     // :Observable<ResponseModel>
     // let data;
 
@@ -56,7 +56,7 @@ export class TaskLocalService {
     //   console.log(result);
     // });
 
-    const para = { subject, state };
+    // const para = { subject, state };
 
     return this.apiSerivce.get(environment.apiUrl + '/api/Todo/Get', para);
 

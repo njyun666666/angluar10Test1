@@ -4,7 +4,7 @@ import { TaskLocalService } from './../../services/task-local.service';
 import { Component, DoCheck, Input, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
 import { Task } from '../../models/task';
 import { ResponseModel } from '../../../../shared/model/response-model';
-import { NgModel } from '@angular/forms';
+import { NgForm, NgModel } from '@angular/forms';
 
 @Component({
   selector: 'app-task-list',
@@ -30,20 +30,21 @@ export class TaskListComponent implements OnInit, OnChanges { // , DoCheck
   constructor(private taskService: TaskLocalService, public counterService: CounterService) { }
 
   ngOnInit(): void {
+
     // console.log('TaskListComponent - ngOnInit');
     // console.log(this.tasks);
 
     // this.taskList$ = this.taskService.getTodoTask();
 
-    this.taskService.getTodoTask().subscribe((result) => {
-      // console.log('getTodoTask().subscribe');
+    // this.taskService.getTodoTask().subscribe((result) => {
+    //   // console.log('getTodoTask().subscribe');
 
-      // this.tasks = result.data;
-      this.taskList$ = result;
-      // this.taskList.data.
-      console.log(this.taskList$);
+    //   // this.tasks = result.data;
+    //   this.taskList$ = result;
+    //   // this.taskList.data.
+    //   console.log(this.taskList$);
 
-    });
+    // });
 
 
   }
@@ -58,17 +59,25 @@ export class TaskListComponent implements OnInit, OnChanges { // , DoCheck
   // }
 
 
-  onSearch(subject: NgModel) {
+  // onSearch(subject: NgModel) {
 
-    console.log(subject);
+  //   console.log(subject);
 
-    this.taskService.getTodoTask(subject.value).subscribe((result) => {
+  //   this.taskService.getTodoTask(subject.value).subscribe((result) => {
+  //     this.taskList$ = result;
+  //     console.log(this.taskList$);
+  //   });
+  // }
+
+  onSearch(form: NgForm) {
+
+    console.log(form, form.value);
+
+    this.taskService.getTodoTask(form.value).subscribe((result) => {
       this.taskList$ = result;
       console.log(this.taskList$);
     });
   }
-
-
 
 
 

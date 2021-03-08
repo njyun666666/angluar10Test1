@@ -6,20 +6,56 @@
 </ng-template>
 
 
-
+<!-- 
 <div class="search">
     <div>
         <div class="input">
-            <!-- <input type="text" [(ngModel)]="subject" placeholder="subject" /> -->
+            <input type="text" [(ngModel)]="subject" placeholder="subject" />
             <input type="text" #subject="ngModel" ngModel placeholder="subject" />
         </div>
         <div class="button">
             <button (click)="onSearch(subject)">Search</button>
         </div>
     </div>
-</div>
+</div> -->
 
 
+<form class="search" #form="ngForm" (submit)="onSearch(form)">
+
+    <div>
+        <div class="input">
+            <input type="text" name="subject" #subject="ngModel" ngModel placeholder="subject" required minlength="2"
+                maxlength="10" />
+            <select name="status" #status="ngModel" ngModel>
+                <option value=""></option>
+                <option value="0">none</option>
+                <option value="1">doing</option>
+                <option value="2">finish</option>
+            </select>
+        </div>
+
+        <div>
+            <span>{{form.value | json }}</span>
+            <button type="submit">search</button>
+        </div>
+
+    </div>
+
+
+    <div ngModelGroup="user" #user="ngModelGroup">
+        <input type="text" name="name" #name="ngModel" ngModel />
+        <input type="text" name="sex" #sex="ngModel" ngModel />
+    </div>
+
+
+    <ul *ngIf="form.touched && form.invalid">
+        <li *ngIf="subject.hasError('required')">subject is required</li>
+        <li *ngIf="subject.hasError('minlength')">
+            最少需要 {{ subject.errors.minlength.requiredLength }} 個字
+        </li>
+    </ul>
+
+</form>
 
 
 

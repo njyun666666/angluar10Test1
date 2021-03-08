@@ -1,10 +1,13 @@
 div.data-empty {
-    margin: 5px;
+    margin: 2px;
     font-size: 14pt;
     line-height: 2em;
     text-align: center;
     color: #444;
     border: solid 1px #ccc;
+}
+input {
+    outline: none;
 }
 .search {
     padding: 10px;
@@ -27,4 +30,47 @@ div.data-empty {
 
 .search div.button * {
     margin-right: 4px;
+}
+.search.ng-untouched {
+    border: solid 2px blueviolet;
+}
+
+.search.ng-touched {
+    border: solid 2px coral;
+}
+
+.search div.input input.ng-untouched {
+    border-color: rgb(255, 6, 6);
+}
+
+.search div.input input.ng-touched {
+    border-color: rgb(0, 255, 0);
+}
+.search.ng-pristine {
+    border: solid 2px blueviolet;
+}
+
+.search.ng-dirty {
+    border: solid 2px coral;
+}
+
+.search div.input input.ng-pristine {
+    border-color: rgb(110, 238, 255);
+    background-color: rgb(110, 238, 255);
+}
+
+.search div.input input.ng-dirty {
+    border-color: rgb(137, 255, 137);
+    background-color: rgb(137, 255, 137);
+}
+.search div.input input.ng-touched.ng-invalid {
+    border-color: red;
+    border-width: 1px;
+}
+
+ul {
+    margin: 0;
+    padding-left: 2em;
+    font-size: 10pt;
+    color: red;
 }
