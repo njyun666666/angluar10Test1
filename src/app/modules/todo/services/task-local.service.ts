@@ -63,6 +63,11 @@ export class TaskLocalService {
   }
 
 
+  // add(task: Task): Observable<any> {
+  //   task.id=this.
+
+  // }
+
 
 
 }

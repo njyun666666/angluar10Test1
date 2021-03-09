@@ -16,10 +16,24 @@
         </select>
     </div>
 
+
+    <div class="tags-field">
+        <button type="button" (click)="onAddTag()">add tag</button>
+
+        <div formArrayName="tags" *ngFor="let control of tags.controls; let index=index">
+            <ng-container [formGroupName]="index">
+                <input type="text" formControlName="tag" />
+            </ng-container>
+        </div>
+
+    </div>
+
+
+
 </form>
 
-<br>
+<br><br>
 
 <pre>{{form.value | json }}</pre>
 
-
+<br><br>
