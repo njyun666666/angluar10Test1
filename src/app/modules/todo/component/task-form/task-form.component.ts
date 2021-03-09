@@ -1,6 +1,6 @@
 import { TaskLocalService } from './../../services/task-local.service';
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-task-form',
@@ -11,7 +11,13 @@ export class TaskFormComponent implements OnInit {
 
   form: FormGroup;
 
+  get subject(): FormControl {
+    return this.form.get('subject') as FormControl;
+  }
 
+  get level(): FormControl {
+    return this.form.get('level') as FormControl;
+  }
 
   get tags(): FormArray {
     return this.form.get('tags') as FormArray;
@@ -30,13 +36,22 @@ export class TaskFormComponent implements OnInit {
 
 
     this.form = this.fb.group({
-      subject: this.fb.control(null),
+      subject: this.fb.control(null, [Validators.required]),
       state: this.fb.control(0),
-      level: this.fb.control(null),
-      tags: this.fb.array([])
+      level: this.fb.control(null, [Validators.required]),
+      tags: this.fb.array([], [this.arrayCannotEmpty])
     });
 
 
+  }
+
+
+  arrayCannotEmpty(control: FormArray): ValidationErrors {
+    console.log('arrayCannotEmpty',control);
+    if (control.length === 0) {
+      return { cannotEmpty: true };
+    }
+    return null;
   }
 
 
@@ -57,7 +72,7 @@ export class TaskFormComponent implements OnInit {
   }
 
   onSave(): void {
-    this.taskLocalService.add(this.form.value).subscribe((result)=>{
+    this.taskLocalService.add(this.form.value).subscribe((result) => {
       console.log(result);
     });
   }

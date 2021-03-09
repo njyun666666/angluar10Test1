@@ -1,8 +1,14 @@
 <form [formGroup]="form">
+
     <div class="form-field">
         <label>subject</label>
         <input type="text" formControlName="subject" />
     </div>
+
+    <ul *ngIf="subject.touched && subject.invalid">
+        <li *ngIf="subject.hasError('required')">subject is required</li>
+    </ul>
+
 
     <div class="form-field">
         <label>level</label>
@@ -15,6 +21,10 @@
             <option value="XL">XL</option>
         </select>
     </div>
+
+    <ul *ngIf="level.touched && level.invalid">
+        <li *ngIf="level.hasError('required')">level is required</li>
+    </ul>
 
 
     <div class="tags-field">
@@ -31,6 +41,12 @@
         </div>
 
     </div>
+    <ul>
+        <li *ngIf="tags.hasError('cannotEmpty')" >tags cannotEmpty</li>
+    </ul>
+
+
+
 
     <div class="button">
         <button type="button" (click)="onSave()">Save</button>
