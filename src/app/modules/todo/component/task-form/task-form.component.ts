@@ -1,6 +1,6 @@
 import { TaskLocalService } from './../../services/task-local.service';
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-task-form',
@@ -39,20 +39,31 @@ export class TaskFormComponent implements OnInit {
       subject: this.fb.control(null, [Validators.required]),
       state: this.fb.control(0),
       level: this.fb.control(null, [Validators.required]),
-      tags: this.fb.array([], [this.arrayCannotEmpty])
+      tags: this.fb.array([], [this.arrayCannotEmpty()])
+      // tags: this.fb.array([], [this.arrayCannotEmpty])
     });
 
 
   }
 
-
-  arrayCannotEmpty(control: FormArray): ValidationErrors {
-    console.log('arrayCannotEmpty',control);
-    if (control.length === 0) {
-      return { cannotEmpty: true };
-    }
-    return null;
+  arrayCannotEmpty(): ValidatorFn {
+    return (control: FormArray) => {
+      // console.log('arrayCannotEmpty', control);
+      if (control.length === 0) {
+        return { cannotEmpty: true };
+      }
+      return null;
+    };
   }
+
+
+  // arrayCannotEmpty(control: FormArray): ValidationErrors {
+  //   console.log('arrayCannotEmpty',control);
+  //   if (control.length === 0) {
+  //     return { cannotEmpty: true };
+  //   }
+  //   return null;
+  // }
 
 
   onAddTag(): void {

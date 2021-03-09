@@ -41,9 +41,12 @@
         </div>
 
     </div>
-    <ul>
-        <li *ngIf="tags.hasError('cannotEmpty')" >tags cannotEmpty</li>
+
+
+    <ul *ngIf="tags.invalid">
+        <li *ngIf="tags.hasError('cannotEmpty')">tags cannotEmpty</li>
     </ul>
+
 
 
 
