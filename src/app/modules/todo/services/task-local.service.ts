@@ -63,10 +63,12 @@ export class TaskLocalService {
   }
 
 
-  // add(task: Task): Observable<any> {
-  //   task.id=this.
+  add(task: Task) {
+    // task.id=this. Observable<any>
+    console.log(task);
 
-  // }
+    return this.apiSerivce.post(environment.apiUrl+'/api/Todo/Add', task);
+  }
 
 
 

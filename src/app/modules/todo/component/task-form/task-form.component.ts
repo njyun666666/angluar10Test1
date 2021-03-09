@@ -1,3 +1,4 @@
+import { TaskLocalService } from './../../services/task-local.service';
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 
@@ -17,7 +18,7 @@ export class TaskFormComponent implements OnInit {
   }
 
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder, private taskLocalService: TaskLocalService) { }
 
   ngOnInit(): void {
 
@@ -42,11 +43,25 @@ export class TaskFormComponent implements OnInit {
   onAddTag(): void {
     console.log(this.tags, this.tags.value);
 
-    const tag = this.fb.group({
-      tag: this.fb.control(null)
-    });
+    // const tag = this.fb.group({
+    //   tag: this.fb.control(null)
+    // });
+
+
+    const tag = this.fb.control(null);
     this.tags.push(tag);
   }
+
+  onDeleteTag(index: number): void {
+    this.tags.removeAt(index);
+  }
+
+  onSave(): void {
+    this.taskLocalService.add(this.form.value).subscribe((result)=>{
+      console.log(result);
+    });
+  }
+
 
 
 }

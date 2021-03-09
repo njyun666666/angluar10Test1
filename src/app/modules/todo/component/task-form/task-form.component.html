@@ -21,16 +21,24 @@
         <button type="button" (click)="onAddTag()">add tag</button>
 
         <div formArrayName="tags" *ngFor="let control of tags.controls; let index=index">
-            <ng-container [formGroupName]="index">
-                <input type="text" formControlName="tag" />
-            </ng-container>
+            <input type="text" [formControl]="control">
+
+            <button type="button" (click)="onDeleteTag(index)">delete</button>
+
+            <!-- <ng-container [formGroupName]="index"> -->
+            <!-- <input type="text" formControlName="tag" /> -->
+            <!-- </ng-container> -->
         </div>
 
     </div>
 
-
+    <div class="button">
+        <button type="button" (click)="onSave()">Save</button>
+    </div>
 
 </form>
+
+
 
 <br><br>
 
