@@ -10,15 +10,19 @@ import { TaskListComponent } from './component/task-list/task-list.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { FormsModule } from '@angular/forms';
 import { TaskFormComponent } from './component/task-form/task-form.component';
+import { TodoaddComponent } from './pages/todoadd/todoadd.component';
+import { TodonavComponent } from './component/todonav/todonav.component';
+import { RouterModule } from '@angular/router';
 
 
 @NgModule({
-  declarations: [TaskComponent, TodolistComponent, TaskStateColorDirective, TaskListComponent, TaskFormComponent],
+  declarations: [TaskComponent, TodolistComponent, TaskStateColorDirective, TaskListComponent, TaskFormComponent, TodoaddComponent, TodonavComponent],
   imports: [
     CommonModule,
     SharedModule,
     TodoRoutingModule,
-    UiModule
+    UiModule,
+    RouterModule
   ],
   exports: [TaskListComponent]
 })
