@@ -5,6 +5,7 @@ import { environment } from 'src/environments/environment';
 import { TaskState } from '../enum/task-state.enum';
 import { Task } from '../models/task';
 import { ResponseModel } from '../../../shared/model/response-model';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -70,12 +71,15 @@ export class TaskLocalService {
     return this.apiSerivce.post(environment.apiUrl + '/api/Todo/Add', task);
   }
 
-  // ifExists(subject: string): Observable<boolean> {
-  //   const para = { subject };
-  //   const result = this.apiSerivce.post(environment.apiUrl + '/api/Todo/SubjectExists', para).toPromise();
+  ifExists(subject: string): Observable<boolean> {
+    const para = { subject };
 
-  //   return result.data;
-  // }
+    return this.apiSerivce.post(environment.apiUrl + '/api/Todo/SubjectExists', para).pipe(map((task) => {
+      console.log(task);
+      return task.data === 1
+    }));
+
+  }
 
 
 }

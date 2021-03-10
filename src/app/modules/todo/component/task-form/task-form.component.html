@@ -7,6 +7,7 @@
 
     <ul *ngIf="subject.touched && subject.invalid">
         <li *ngIf="subject.hasError('required')">subject is required</li>
+        <li *ngIf="subject.hasError('shouldBeUnique')">subject shouldBeUnique</li>
     </ul>
 
 

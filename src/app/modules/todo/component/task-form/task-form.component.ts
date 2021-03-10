@@ -1,6 +1,8 @@
+import { Observable, of } from 'rxjs';
 import { TaskLocalService } from './../../services/task-local.service';
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-task-form',
@@ -36,7 +38,7 @@ export class TaskFormComponent implements OnInit {
 
 
     this.form = this.fb.group({
-      subject: this.fb.control(null, [Validators.required]),
+      subject: this.fb.control(null, [Validators.required], [this.shouldBeUnique.bind(this)]),
       state: this.fb.control(0),
       level: this.fb.control(null, [Validators.required]),
       tags: this.fb.array([], [this.arrayCannotEmpty()])
@@ -66,6 +68,36 @@ export class TaskFormComponent implements OnInit {
   // }
 
 
+  shouldBeUnique(control: FormControl): Observable<ValidationErrors> {
+
+    // console.log(this.taskLocalService);
+
+    if (control.value) {
+
+
+      return this.taskLocalService.ifExists(control.value).pipe(map((isExists) => { return isExists ? { shouldBeUnique: true } : null; }));
+
+
+      // console.log(isExists);
+
+      // isExists.then((value) => {
+      //   console.log('isExists.then', value.data);
+
+      //   if (value.data === 1) {
+      //     console.log(of({ shouldBeUnique: true }));
+      //     return of({ shouldBeUnique: true });
+      //   }
+
+      // });
+
+
+    }
+
+    return of(null);
+
+  }
+
+
   onAddTag(): void {
     console.log(this.tags, this.tags.value);
 
@@ -83,6 +115,7 @@ export class TaskFormComponent implements OnInit {
   }
 
   onSave(): void {
+
     this.taskLocalService.add(this.form.value).subscribe((result) => {
       console.log(result);
     });
