@@ -64,7 +64,7 @@
 <ng-template #list>
     <app-task *ngFor="let task of taskList$.data; let i=index" [class.odd]="i%2===1" [subject]="task.subject"
         [(state)]="task.state" [level]="task.level" [tags]="task.tags" [expectDate]="task.expectDate"
-        [finishedDate]="task.finishedDate"></app-task>
+        [finishedDate]="task.finishedDate" (edit)="onEdit(task.id)"></app-task>
     <!-- [class.odd]="odd" -->
 </ng-template>
 

@@ -11,6 +11,8 @@ import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angu
 })
 export class TaskComponent implements OnInit, OnChanges {
 
+  @Output() edit = new EventEmitter<void>();
+
   task: Task;
   TaskState = TaskState;
   stateDesc: string;

@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { CounterService } from './../../../../shared/services/counter.service';
 import { Observable } from 'rxjs';
 import { TaskLocalService } from './../../services/task-local.service';
@@ -27,7 +28,7 @@ export class TaskListComponent implements OnInit, OnChanges { // , DoCheck
   // tasks: Task[];
   taskList$: ResponseModel<Task[]>;
 
-  constructor(private taskService: TaskLocalService, public counterService: CounterService) { }
+  constructor(private router: Router, private taskService: TaskLocalService, public counterService: CounterService) { }
 
   ngOnInit(): void {
 
@@ -79,7 +80,9 @@ export class TaskListComponent implements OnInit, OnChanges { // , DoCheck
     });
   }
 
-
+  onEdit(id: number): void {
+    this.router.navigate(['/todo/task', id]);
+  }
 
 
 }

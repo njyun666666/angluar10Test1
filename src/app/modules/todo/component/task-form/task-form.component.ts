@@ -2,7 +2,8 @@ import { Observable, of } from 'rxjs';
 import { TaskLocalService } from './../../services/task-local.service';
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
-import { map } from 'rxjs/operators';
+import { filter, map, switchMap, tap } from 'rxjs/operators';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-task-form',
@@ -12,6 +13,10 @@ import { map } from 'rxjs/operators';
 export class TaskFormComponent implements OnInit {
 
   form: FormGroup;
+
+  get id(): FormControl {
+    return this.form.get('id') as FormControl;
+  }
 
   get subject(): FormControl {
     return this.form.get('subject') as FormControl;
@@ -26,9 +31,10 @@ export class TaskFormComponent implements OnInit {
   }
 
 
-  constructor(private fb: FormBuilder, private taskLocalService: TaskLocalService) { }
+  constructor(private fb: FormBuilder, private route: ActivatedRoute, private router: Router, private taskLocalService: TaskLocalService) { }
 
   ngOnInit(): void {
+
 
     // this.form = new FormGroup({
     //   subject: new FormControl(),
@@ -36,14 +42,49 @@ export class TaskFormComponent implements OnInit {
     //   level: new FormControl()
     // });
 
-
     this.form = this.fb.group({
+      id: this.fb.control(null),
       subject: this.fb.control(null, [Validators.required], [this.shouldBeUnique.bind(this)]),
       state: this.fb.control(0),
       level: this.fb.control(null, [Validators.required]),
       tags: this.fb.array([], [this.arrayCannotEmpty()])
       // tags: this.fb.array([], [this.arrayCannotEmpty])
     });
+
+
+    this.route.paramMap
+      .pipe(
+        map((param) => +param.get('id')),
+        filter((id) => !!id),
+        switchMap((id) => this.taskLocalService.get(id)),
+        tap(() => this.tags.clear()),
+        tap((task) => this.onAddTag(task.data.tags.length))
+      )
+      .subscribe((task) => this.form.patchValue(task.data));
+
+
+
+    // const id = parseInt(this.route.snapshot.paramMap.get('id'));
+
+    // console.log('task id = ', id);
+    // console.log('task id = ', !!id);
+
+
+    // if (!!id) {
+    //   this.taskLocalService.get(id)
+    //     .pipe(
+    //       tap(() => this.tags.clear),
+    //       tap((task) => this.onAddTag(task.data.tags.length))
+    //     )
+    //     .subscribe((task) => {
+    //       console.log('task', task.data);
+    //       this.form.patchValue(task.data);
+    //       console.log(this.form.value);
+    //     });
+    // }
+
+
+
 
 
   }
@@ -98,16 +139,17 @@ export class TaskFormComponent implements OnInit {
   }
 
 
-  onAddTag(): void {
+  onAddTag(count: number): void {
     console.log(this.tags, this.tags.value);
 
     // const tag = this.fb.group({
     //   tag: this.fb.control(null)
     // });
 
-
-    const tag = this.fb.control(null);
-    this.tags.push(tag);
+    for (let i = 0; i < count; i++) {
+      const tag = this.fb.control(null);
+      this.tags.push(tag);
+    }
   }
 
   onDeleteTag(index: number): void {
@@ -119,6 +161,10 @@ export class TaskFormComponent implements OnInit {
     this.taskLocalService.add(this.form.value).subscribe((result) => {
       console.log(result);
     });
+  }
+
+  onNext(): void {
+    this.router.navigate(['/todo/task', this.id.value + 1]);
   }
 
 

@@ -82,4 +82,10 @@ export class TaskLocalService {
   }
 
 
+  get(id: number): Observable<any> {
+    const para = { id };
+    return this.apiSerivce.get(environment.apiUrl + '/api/Todo/GetById', para);
+  }
+
+
 }

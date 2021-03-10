@@ -29,7 +29,7 @@
 
 
     <div class="tags-field">
-        <button type="button" (click)="onAddTag()">add tag</button>
+        <button type="button" (click)="onAddTag(1)">add tag</button>
 
         <div formArrayName="tags" *ngFor="let control of tags.controls; let index=index">
             <input type="text" [formControl]="control">
@@ -54,6 +54,7 @@
 
     <div class="button">
         <button type="button" (click)="onSave()">Save</button>
+        <button type="button" (click)="onNext()">Next</button>
     </div>
 
 </form>

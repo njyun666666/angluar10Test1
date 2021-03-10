@@ -4,7 +4,7 @@
         <span>{{ subject | slice:0:10 }}<span *ngIf="subject.length>10">...</span> </span>
 
         <!-- [disabled]="task.state===TaskState.Finish" -->
-        <button type="button" [attr.disabled]="state===TaskState.Finish?'disabled':null">edit</button>
+        <button type="button" [attr.disabled]="state===TaskState.Finish?'disabled':null" (click)="edit.emit()" >edit</button>
 
         <!-- <span [style.color]="getStateColor()">{{ getStateDesc() }}</span> -->
         <!-- <span [class.doing]="task.state===TaskState.Doing" [class.finish]="task.state===TaskState.Finish">
