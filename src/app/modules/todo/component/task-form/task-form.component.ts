@@ -1,4 +1,4 @@
-import { Observable, of, Subscription } from 'rxjs';
+import { Observable, of, Subject, Subscription } from 'rxjs';
 import { TaskLocalService } from './../../services/task-local.service';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
@@ -14,6 +14,7 @@ export class TaskFormComponent implements OnInit, OnDestroy {
 
   form: FormGroup;
   routerSubscription: Subscription;
+  stop$ = new Subject<void>();
 
   get id(): FormControl {
     return this.form.get('id') as FormControl;
@@ -53,7 +54,8 @@ export class TaskFormComponent implements OnInit, OnDestroy {
     });
 
 
-    this.routerSubscription = this.route.paramMap
+    // this.routerSubscription =
+    this.route.paramMap
       .pipe(
         map((param) => +param.get('id')),
         filter((id) => !!id),
@@ -94,7 +96,10 @@ export class TaskFormComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     // Called once, before the instance is destroyed.
     // Add 'implements OnDestroy' to the class.
-    this.routerSubscription.unsubscribe();
+
+    // this.routerSubscription.unsubscribe();
+    this.stop$.next();
+    this.stop$.complete();
   }
 
   arrayCannotEmpty(): ValidatorFn {
