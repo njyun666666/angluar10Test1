@@ -1,4 +1,4 @@
-import { LanguageService } from './../../language/services/language.service';
+import { LanguageService } from '../../shared/modules/language/services/language.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({

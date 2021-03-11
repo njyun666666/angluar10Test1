@@ -1,8 +1,8 @@
 
-import { NgModule, Component } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { MainLayoutComponent } from './shared/modules/layout/main-layout/main-layout.component';
-import { HeaderOnlyLayoutComponent } from './shared/modules/layout/header-only-layout/header-only-layout.component';
+import { MainLayoutComponent } from './layout/main-layout/main-layout.component';
+import { HeaderOnlyLayoutComponent } from './layout/header-only-layout/header-only-layout.component';
 
 
 const routes: Routes = [
