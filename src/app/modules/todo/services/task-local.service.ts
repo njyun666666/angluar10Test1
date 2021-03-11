@@ -76,7 +76,7 @@ export class TaskLocalService {
 
     return this.apiSerivce.post(environment.apiUrl + '/api/Todo/SubjectExists', para).pipe(map((task) => {
       console.log(task);
-      return task.data === 1
+      return task.data === 1;
     }));
 
   }
