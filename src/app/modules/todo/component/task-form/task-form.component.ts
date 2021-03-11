@@ -33,6 +33,7 @@ export class TaskFormComponent implements OnInit, OnDestroy {
   }
 
 
+  // tslint:disable-next-line: max-line-length
   constructor(private fb: FormBuilder, private route: ActivatedRoute, private router: Router, private taskLocalService: TaskLocalService) { }
 
   ngOnInit(): void {
@@ -52,6 +53,9 @@ export class TaskFormComponent implements OnInit, OnDestroy {
       tags: this.fb.array([], [this.arrayCannotEmpty()])
       // tags: this.fb.array([], [this.arrayCannotEmpty])
     });
+
+
+    console.log('this.route.data', this.route.data);
 
 
     // this.routerSubscription =

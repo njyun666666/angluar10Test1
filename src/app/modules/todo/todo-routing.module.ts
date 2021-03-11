@@ -1,3 +1,4 @@
+import { TaskResolveService } from './services/task-resolve.service';
 import { TodoaddComponent } from './pages/todoadd/todoadd.component';
 import { TodolistComponent } from './pages/todolist/todolist.component';
 import { NgModule } from '@angular/core';
@@ -8,7 +9,7 @@ const routes: Routes = [
   { path: '', component: TodolistComponent },
   { path: 'add', component: TodoaddComponent },
   { path: 'task', component: TodotaskComponent },
-  { path: 'task/:id', component: TodotaskComponent },
+  { path: 'task/:id', component: TodotaskComponent, resolve: { task: TaskResolveService } },
 
 ];
 
