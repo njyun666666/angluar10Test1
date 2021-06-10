@@ -32,6 +32,8 @@ const routes: Routes = [
       { path: '', loadChildren: () => import('./modules/todo/todo.module').then(m => m.TodoModule) }
     ]
   },
+
+  { path: 'rxjs', loadChildren: () => import('./modules/rxjs/rxjs.module').then(m => m.RxjsModule) },
   // {
   //   path: 'first', component: MainLayoutComponent, children: [
   //     { path: '', loadChildren: () => import('./modules/first/first.module').then(m => m.FirstModule) },
